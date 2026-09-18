@@ -383,6 +383,9 @@ class PrivacyLockVerifyFragment : Fragment() {
 
     /**
      * 验证成功
+     *
+     * 这里不再直接打开 HomeFragment。
+     * MainActivity 会根据进入隐私锁之前的页面恢复界面。
      */
     private fun onUnlockSuccess() {
 
@@ -406,21 +409,6 @@ class PrivacyLockVerifyFragment : Fragment() {
                 )
             }
         )
-
-        /*
-         * 不使用 popBackStack，
-         * 因为 MainActivity 打开验证页面时
-         * 没有加入返回栈。
-         *
-         * 验证成功后重新显示首页。
-         */
-        parentFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.fragmentContainer,
-                com.example.myno.jz.ui.home.HomeFragment()
-            )
-            .commit()
     }
 
     override fun onDestroyView() {

@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
      */
     private var privacyUnlocked = false
 
+    /**
+     * 进入隐私锁验证前的页面
+     */
+    private var pageBeforePrivacyLock = R.id.nav_home
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // 应用主题
@@ -72,6 +77,9 @@ class MainActivity : AppCompatActivity() {
 
                 // 允许下一次检查
                 privacyLockChecking = false
+
+                // 恢复进入隐私锁前的页面
+                restorePageBeforePrivacyLock()
             }
         }
 
@@ -145,6 +153,16 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        /**
+         * 记录进入隐私锁之前的页面
+         */
+        pageBeforePrivacyLock =
+            binding.bottomNavigation.selectedItemId
+                .takeIf {
+                    it != 0
+                }
+                ?: R.id.nav_home
+
         privacyLockChecking = true
 
         /**
@@ -161,6 +179,63 @@ class MainActivity : AppCompatActivity() {
                 PrivacyLockVerifyFragment()
             )
             .commit()
+    }
+
+    /**
+     * 恢复进入隐私锁之前的页面
+     */
+    private fun restorePageBeforePrivacyLock() {
+
+        when (pageBeforePrivacyLock) {
+
+            R.id.nav_home -> {
+
+                showFragment(
+                    HomeFragment()
+                )
+            }
+
+            R.id.nav_bills -> {
+
+                showFragment(
+                    BillsFragment()
+                )
+            }
+
+            R.id.nav_statistics -> {
+
+                showFragment(
+                    StatisticsFragment()
+                )
+            }
+
+            R.id.nav_assets -> {
+
+                showFragment(
+                    AssetsFragment()
+                )
+            }
+
+            R.id.nav_settings -> {
+
+                showFragment(
+                    MineFragment()
+                )
+            }
+
+            else -> {
+
+                pageBeforePrivacyLock =
+                    R.id.nav_home
+
+                showFragment(
+                    HomeFragment()
+                )
+            }
+        }
+
+        binding.bottomNavigation.selectedItemId =
+            pageBeforePrivacyLock
     }
 
     /**
