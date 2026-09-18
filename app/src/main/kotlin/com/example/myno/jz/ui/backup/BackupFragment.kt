@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.example.myno.jz.data.repository.BackupRepository
 import com.example.myno.jz.data.repository.FinanceRepository
 import com.example.myno.jz.databinding.FragmentBackupBinding
+import com.example.myno.jz.utils.AppLogger
 import com.example.myno.jz.utils.ExcelExporter
 import java.io.File
 import java.text.SimpleDateFormat
@@ -91,6 +92,19 @@ override fun onViewCreated(
     excelExporter =
         ExcelExporter()
 
+    // 初始化日志系统
+    AppLogger.init(requireContext())
+
+    AppLogger.i(
+        "BackupFragment",
+        "备份页面初始化完成"
+    )
+
+    AppLogger.i(
+        "BackupFragment",
+        "日志文件路径：${AppLogger.getLogFile()?.absolutePath}"
+    )
+
     setupViews()
     updateBackupInfo()
     updateBackupList()
@@ -129,10 +143,74 @@ private fun setupViews() {
  * 导出 Excel
  */
 private fun exportExcel(uri: Uri) {
+
+    AppLogger.i(
+        "ExcelExport",
+        "========================================"
+    )
+
+    AppLogger.i(
+        "ExcelExport",
+        "开始 Excel 导出"
+    )
+
+    AppLogger.i(
+        "ExcelExport",
+        "目标 Uri：$uri"
+    )
+
     try {
-        val bills = financeRepository.getBills()
-        val accounts = financeRepository.getAccounts()
-        val categories = financeRepository.getCategories()
+
+        // =====================================================
+        // 1. 读取账单
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "开始读取账单数据"
+        )
+
+        val bills =
+            financeRepository.getBills()
+
+        AppLogger.i(
+            "ExcelExport",
+            "账单读取完成：${bills.size} 条"
+        )
+
+        // =====================================================
+        // 2. 读取账户
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "开始读取账户数据"
+        )
+
+        val accounts =
+            financeRepository.getAccounts()
+
+        AppLogger.i(
+            "ExcelExport",
+            "账户读取完成：${accounts.size} 个"
+        )
+
+        // =====================================================
+        // 3. 读取分类
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "开始读取分类数据"
+        )
+
+        val categories =
+            financeRepository.getCategories()
+
+        AppLogger.i(
+            "ExcelExport",
+            "分类读取完成：${categories.size} 个"
+        )
 
         Toast.makeText(
             requireContext(),
@@ -140,18 +218,117 @@ private fun exportExcel(uri: Uri) {
             Toast.LENGTH_LONG
         ).show()
 
+        // =====================================================
+        // 4. 打开输出流
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "准备打开 ContentResolver 输出流"
+        )
+
         requireContext()
             .contentResolver
             .openOutputStream(uri)
             ?.use { outputStream ->
+
+                AppLogger.i(
+                    "ExcelExport",
+                    "输出流打开成功"
+                )
+
+                // =================================================
+                // 5. 开始生成 XLSX
+                // =================================================
+
+                AppLogger.i(
+                    "ExcelExport",
+                    "调用 ExcelExporter.export()"
+                )
+
                 excelExporter.export(
                     outputStream = outputStream,
                     bills = bills,
                     accounts = accounts,
                     categories = categories
                 )
+
+                AppLogger.i(
+                    "ExcelExport",
+                    "ExcelExporter.export() 执行完成"
+                )
             }
-            ?: throw IllegalStateException("无法打开文件输出流")
+            ?: throw IllegalStateException(
+                "无法打开文件输出流"
+            )
+
+        // =====================================================
+        // 6. 输出流关闭
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "输出流已经关闭"
+        )
+
+        // =====================================================
+        // 7. 重新读取 XLSX
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "准备重新读取刚刚生成的 XLSX"
+        )
+
+        requireContext()
+            .contentResolver
+            .openInputStream(uri)
+            ?.use { inputStream ->
+
+                AppLogger.i(
+                    "ExcelExport",
+                    "XLSX 输入流打开成功"
+                )
+
+                val validation =
+                    excelExporter.validate(
+                        inputStream
+                    )
+
+                AppLogger.i(
+                    "ExcelExport",
+                    "XLSX 验证结果：$validation"
+                )
+
+                if (!validation.valid) {
+
+                    throw IllegalStateException(
+                        "XLSX 文件验证失败：${validation.message}"
+                    )
+                }
+            }
+            ?: throw IllegalStateException(
+                "导出完成后无法重新读取 XLSX 文件"
+            )
+
+        // =====================================================
+        // 8. 成功
+        // =====================================================
+
+        AppLogger.i(
+            "ExcelExport",
+            "XLSX 文件验证成功"
+        )
+
+        AppLogger.i(
+            "ExcelExport",
+            "Excel 导出成功：账单=${bills.size}"
+        )
+
+        AppLogger.i(
+            "ExcelExport",
+            "========================================"
+        )
 
         Toast.makeText(
             requireContext(),
@@ -160,6 +337,22 @@ private fun exportExcel(uri: Uri) {
         ).show()
 
     } catch (e: Exception) {
+
+        // =====================================================
+        // 9. 记录完整异常
+        // =====================================================
+
+        AppLogger.e(
+            "ExcelExport",
+            "Excel 导出失败：${e.message ?: "未知错误"}",
+            e
+        )
+
+        AppLogger.i(
+            "ExcelExport",
+            "========================================"
+        )
+
         Toast.makeText(
             requireContext(),
             "Excel 导出失败：${e.message ?: "未知错误"}",

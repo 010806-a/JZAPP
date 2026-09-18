@@ -4,35 +4,46 @@ import com.example.myno.jz.data.model.Account
 import com.example.myno.jz.data.model.Bill
 import com.example.myno.jz.data.model.BillType
 import com.example.myno.jz.data.model.Category
+import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 import java.util.zip.ZipOutputStream
 
 /**
  * MoneyBook Excel 导出器
  *
- * 生成标准 XLSX 文件。
- *
- * 工作表：
- * 1. 账单明细
- * 2. 统计汇总
- * 3. 账户汇总
- *
- * 本版本故意采用最小 XLSX 结构：
- * - 不使用 styles.xml
- * - 不使用 sharedStrings.xml
- * - 使用 inlineStr
- * - 数字直接写入 <v>
- *
- * 目的：
- * 最大程度降低 WPS / Excel / Android 文件管理器
- * 对手写 XLSX XML 的兼容性问题。
+ * 当前版本重点：
+ * 1. 生成 XLSX
+ * 2. 详细记录导出过程
+ * 3. 导出完成后验证 XLSX ZIP 结构
+ * 4. 验证三个工作表是否存在
+ * 5. 验证账单明细是否真正写入 sheet1.xml
  */
 class ExcelExporter {
 
+    companion object {
+        private const val TAG = "ExcelExporter"
+    }
+
+    /**
+     * XLSX 验证结果
+     */
+    data class ValidationResult(
+        val valid: Boolean,
+        val message: String,
+        val entryCount: Int,
+        val sheet1HasData: Boolean,
+        val sheet2Exists: Boolean,
+        val sheet3Exists: Boolean
+    )
+
+    /**
+     * 导出 Excel
+     */
     fun export(
         outputStream: OutputStream,
         bills: List<Bill>,
@@ -40,93 +51,231 @@ class ExcelExporter {
         categories: List<Category>
     ) {
 
-        val sortedBills =
-            bills.sortedByDescending { it.timestamp }
+        AppLogger.i(
+            TAG,
+            "export() 开始：账单=${bills.size}，账户=${accounts.size}，分类=${categories.size}"
+        )
 
-        val accountMap =
-            accounts.associateBy { it.id }
+        try {
 
-        val categoryMap =
-            categories.associateBy { it.id }
+            val sortedBills =
+                bills.sortedByDescending {
+                    it.timestamp
+                }
 
-        ZipOutputStream(outputStream).use { zip ->
-
-            // =====================================================
-            // XLSX 基础文件
-            // =====================================================
-
-            writeEntry(
-                zip,
-                "[Content_Types].xml",
-                contentTypesXml()
+            AppLogger.i(
+                TAG,
+                "账单排序完成：${sortedBills.size} 条"
             )
 
-            writeEntry(
-                zip,
-                "_rels/.rels",
-                rootRelsXml()
+            val accountMap =
+                accounts.associateBy {
+                    it.id
+                }
+
+            val categoryMap =
+                categories.associateBy {
+                    it.id
+                }
+
+            AppLogger.i(
+                TAG,
+                "账户 Map 创建完成：${accountMap.size}"
             )
 
-            writeEntry(
-                zip,
-                "xl/workbook.xml",
-                workbookXml()
+            AppLogger.i(
+                TAG,
+                "分类 Map 创建完成：${categoryMap.size}"
             )
 
-            writeEntry(
-                zip,
-                "xl/_rels/workbook.xml.rels",
-                workbookRelsXml()
-            )
+            ZipOutputStream(outputStream).use { zip ->
 
-            // =====================================================
-            // 工作表
-            // =====================================================
-
-            writeEntry(
-                zip,
-                "xl/worksheets/sheet1.xml",
-                detailSheetXml(
-                    sortedBills,
-                    accountMap,
-                    categoryMap
+                AppLogger.i(
+                    TAG,
+                    "ZipOutputStream 创建成功"
                 )
+
+                // =================================================
+                // XLSX 基础文件
+                // =================================================
+
+                AppLogger.i(
+                    TAG,
+                    "开始写入 [Content_Types].xml"
+                )
+
+                writeEntry(
+                    zip,
+                    "[Content_Types].xml",
+                    contentTypesXml()
+                )
+
+                AppLogger.i(
+                    TAG,
+                    "开始写入 _rels/.rels"
+                )
+
+                writeEntry(
+                    zip,
+                    "_rels/.rels",
+                    rootRelsXml()
+                )
+
+                AppLogger.i(
+                    TAG,
+                    "开始写入 xl/workbook.xml"
+                )
+
+                writeEntry(
+                    zip,
+                    "xl/workbook.xml",
+                    workbookXml()
+                )
+
+                AppLogger.i(
+                    TAG,
+                    "开始写入 xl/_rels/workbook.xml.rels"
+                )
+
+                writeEntry(
+                    zip,
+                    "xl/_rels/workbook.xml.rels",
+                    workbookRelsXml()
+                )
+
+                // =================================================
+                // 工作表 1
+                // =================================================
+
+                AppLogger.i(
+                    TAG,
+                    "开始生成 sheet1：账单明细"
+                )
+
+                val detailXml =
+                    detailSheetXml(
+                        sortedBills,
+                        accountMap,
+                        categoryMap
+                    )
+
+                AppLogger.i(
+                    TAG,
+                    "sheet1 XML 生成完成：${detailXml.length} 字符"
+                )
+
+                writeEntry(
+                    zip,
+                    "xl/worksheets/sheet1.xml",
+                    detailXml
+                )
+
+                // =================================================
+                // 工作表 2
+                // =================================================
+
+                AppLogger.i(
+                    TAG,
+                    "开始生成 sheet2：统计汇总"
+                )
+
+                val summaryXml =
+                    summarySheetXml(
+                        sortedBills,
+                        categoryMap
+                    )
+
+                AppLogger.i(
+                    TAG,
+                    "sheet2 XML 生成完成：${summaryXml.length} 字符"
+                )
+
+                writeEntry(
+                    zip,
+                    "xl/worksheets/sheet2.xml",
+                    summaryXml
+                )
+
+                // =================================================
+                // 工作表 3
+                // =================================================
+
+                AppLogger.i(
+                    TAG,
+                    "开始生成 sheet3：账户汇总"
+                )
+
+                val accountXml =
+                    accountSheetXml(
+                        sortedBills,
+                        accounts
+                    )
+
+                AppLogger.i(
+                    TAG,
+                    "sheet3 XML 生成完成：${accountXml.length} 字符"
+                )
+
+                writeEntry(
+                    zip,
+                    "xl/worksheets/sheet3.xml",
+                    accountXml
+                )
+
+                AppLogger.i(
+                    TAG,
+                    "所有 XLSX ZIP Entry 写入完成"
+                )
+            }
+
+            AppLogger.i(
+                TAG,
+                "ZipOutputStream 已关闭，export() 完成"
             )
 
-            writeEntry(
-                zip,
-                "xl/worksheets/sheet2.xml",
-                summarySheetXml(
-                    sortedBills,
-                    categoryMap
-                )
+        } catch (e: Exception) {
+
+            AppLogger.e(
+                TAG,
+                "export() 发生异常",
+                e
             )
 
-            writeEntry(
-                zip,
-                "xl/worksheets/sheet3.xml",
-                accountSheetXml(
-                    sortedBills,
-                    accounts
-                )
-            )
+            throw e
         }
     }
 
-    // =============================================================
-    // 写入 ZIP Entry
-    // =============================================================
-
+    /**
+     * 写入 ZIP Entry
+     */
     private fun writeEntry(
         zip: ZipOutputStream,
         path: String,
         content: String
     ) {
-        zip.putNextEntry(ZipEntry(path))
-        zip.write(
-            content.toByteArray(Charsets.UTF_8)
+
+        val bytes =
+            content.toByteArray(
+                Charsets.UTF_8
+            )
+
+        AppLogger.i(
+            TAG,
+            "写入 ZIP Entry：$path，${bytes.size} bytes"
         )
+
+        zip.putNextEntry(
+            ZipEntry(path)
+        )
+
+        zip.write(bytes)
+
         zip.closeEntry()
+
+        AppLogger.i(
+            TAG,
+            "ZIP Entry 写入完成：$path"
+        )
     }
 
     // =============================================================
@@ -139,7 +288,13 @@ class ExcelExporter {
         categoryMap: Map<String, Category>
     ): String {
 
-        val rows = StringBuilder()
+        AppLogger.i(
+            TAG,
+            "detailSheetXml() 开始，账单数量=${bills.size}"
+        )
+
+        val rows =
+            StringBuilder()
 
         rows.append(
             row(
@@ -153,6 +308,7 @@ class ExcelExporter {
                     textCell("F1", "备注")
                 )
             )
+
         )
 
         val dateFormat =
@@ -172,8 +328,12 @@ class ExcelExporter {
 
             val type =
                 when (bill.type) {
-                    BillType.INCOME -> "收入"
-                    BillType.EXPENSE -> "支出"
+
+                    BillType.INCOME ->
+                        "收入"
+
+                    BillType.EXPENSE ->
+                        "支出"
                 }
 
             val category =
@@ -186,6 +346,11 @@ class ExcelExporter {
 
             val note =
                 bill.note ?: ""
+
+            AppLogger.i(
+                TAG,
+                "生成账单行：Excel第${rowNumber}行，billId=${bill.id}，类型=$type，金额=${bill.amount}，分类=$category，账户=$account，备注长度=${note.length}"
+            )
 
             rows.append(
                 row(
@@ -222,9 +387,17 @@ class ExcelExporter {
             rowNumber++
         }
 
-        return worksheetXml(
-            rows = rows.toString()
+        val result =
+            worksheetXml(
+                rows = rows.toString()
+            )
+
+        AppLogger.i(
+            TAG,
+            "detailSheetXml() 完成：数据行=${rowNumber - 2}，XML长度=${result.length}"
         )
+
+        return result
     }
 
     // =============================================================
@@ -236,7 +409,13 @@ class ExcelExporter {
         categoryMap: Map<String, Category>
     ): String {
 
-        val rows = StringBuilder()
+        AppLogger.i(
+            TAG,
+            "summarySheetXml() 开始"
+        )
+
+        val rows =
+            StringBuilder()
 
         val totalIncome =
             bills
@@ -259,7 +438,11 @@ class ExcelExporter {
         val balance =
             totalIncome - totalExpense
 
-        // 标题
+        AppLogger.i(
+            TAG,
+            "统计计算：收入=$totalIncome，支出=$totalExpense，结余=$balance"
+        )
+
         rows.append(
             row(
                 1,
@@ -272,7 +455,6 @@ class ExcelExporter {
             )
         )
 
-        // 基础统计标题
         rows.append(
             row(
                 3,
@@ -319,6 +501,7 @@ class ExcelExporter {
                     )
                 )
             )
+
         )
 
         rows.append(
@@ -352,10 +535,6 @@ class ExcelExporter {
                 )
             )
         )
-
-        // =====================================================
-        // 收入分类
-        // =====================================================
 
         rows.append(
             row(
@@ -407,6 +586,11 @@ class ExcelExporter {
                     it.amount
                 }
 
+            AppLogger.i(
+                TAG,
+                "收入分类：$categoryName=$amount"
+            )
+
             rows.append(
                 row(
                     incomeRow,
@@ -425,10 +609,6 @@ class ExcelExporter {
 
             incomeRow++
         }
-
-        // =====================================================
-        // 支出分类
-        // =====================================================
 
         val expenseTitleRow =
             incomeRow + 1
@@ -488,6 +668,11 @@ class ExcelExporter {
                     it.amount
                 }
 
+            AppLogger.i(
+                TAG,
+                "支出分类：$categoryName=$amount"
+            )
+
             rows.append(
                 row(
                     expenseRow,
@@ -507,9 +692,17 @@ class ExcelExporter {
             expenseRow++
         }
 
-        return worksheetXml(
-            rows = rows.toString()
+        val result =
+            worksheetXml(
+                rows = rows.toString()
+            )
+
+        AppLogger.i(
+            TAG,
+            "summarySheetXml() 完成：XML长度=${result.length}"
         )
+
+        return result
     }
 
     // =============================================================
@@ -521,7 +714,13 @@ class ExcelExporter {
         accounts: List<Account>
     ): String {
 
-        val rows = StringBuilder()
+        AppLogger.i(
+            TAG,
+            "accountSheetXml() 开始，账户数量=${accounts.size}"
+        )
+
+        val rows =
+            StringBuilder()
 
         rows.append(
             row(
@@ -595,6 +794,11 @@ class ExcelExporter {
                     income -
                     expense
 
+            AppLogger.i(
+                TAG,
+                "生成账户行：第${rowNumber}行，账户=${account.name}，初始=${account.balance}，收入=$income，支出=$expense，当前=$currentBalance"
+            )
+
             rows.append(
                 row(
                     rowNumber,
@@ -626,9 +830,216 @@ class ExcelExporter {
             rowNumber++
         }
 
-        return worksheetXml(
-            rows = rows.toString()
+        val result =
+            worksheetXml(
+                rows = rows.toString()
+            )
+
+        AppLogger.i(
+            TAG,
+            "accountSheetXml() 完成：数据行=${rowNumber - 4}，XML长度=${result.length}"
         )
+
+        return result
+    }
+
+    // =============================================================
+    // XLSX 验证
+    // =============================================================
+
+    fun validate(
+        inputStream: InputStream
+    ): ValidationResult {
+
+        AppLogger.i(
+            TAG,
+            "validate() 开始验证导出的 XLSX"
+        )
+
+        val entries =
+            mutableMapOf<String, String>()
+
+        try {
+
+            ZipInputStream(
+                inputStream
+            ).use { zip ->
+
+                var entry: ZipEntry?
+
+                while (true) {
+
+                    entry =
+                        zip.nextEntry
+                            ?: break
+
+                    val name =
+                        entry!!.name
+
+                    AppLogger.i(
+                        TAG,
+                        "验证发现 ZIP Entry：$name"
+                    )
+
+                    val content =
+                        zip.readBytes()
+                            .toString(
+                                Charsets.UTF_8
+                            )
+
+                    entries[name] =
+                        content
+
+                    zip.closeEntry()
+                }
+            }
+
+            AppLogger.i(
+                TAG,
+                "XLSX ZIP 读取完成，共 ${entries.size} 个 Entry"
+            )
+
+            val requiredEntries =
+                listOf(
+                    "[Content_Types].xml",
+                    "_rels/.rels",
+                    "xl/workbook.xml",
+                    "xl/_rels/workbook.xml.rels",
+                    "xl/worksheets/sheet1.xml",
+                    "xl/worksheets/sheet2.xml",
+                    "xl/worksheets/sheet3.xml"
+                )
+
+            val missing =
+                requiredEntries.filter {
+                    !entries.containsKey(it)
+                }
+
+            if (missing.isNotEmpty()) {
+
+                val message =
+                    "缺少 Entry：${missing.joinToString()}"
+
+                AppLogger.e(
+                    TAG,
+                    message
+                )
+
+                return ValidationResult(
+                    valid = false,
+                    message = message,
+                    entryCount = entries.size,
+                    sheet1HasData = false,
+                    sheet2Exists =
+                        entries.containsKey(
+                            "xl/worksheets/sheet2.xml"
+                        ),
+                    sheet3Exists =
+                        entries.containsKey(
+                            "xl/worksheets/sheet3.xml"
+                        )
+                )
+            }
+
+            val sheet1 =
+                entries[
+                    "xl/worksheets/sheet1.xml"
+                ].orEmpty()
+
+            val sheet2Exists =
+                entries.containsKey(
+                    "xl/worksheets/sheet2.xml"
+                )
+
+            val sheet3Exists =
+                entries.containsKey(
+                    "xl/worksheets/sheet3.xml"
+                )
+
+            val sheet1HasData =
+                sheet1.contains(
+                    "<row r=\"2\">"
+                ) &&
+                    sheet1.contains(
+                        "A2"
+                    )
+
+            AppLogger.i(
+                TAG,
+                "sheet1 是否存在账单数据：$sheet1HasData"
+            )
+
+            AppLogger.i(
+                TAG,
+                "sheet2 是否存在：$sheet2Exists"
+            )
+
+            AppLogger.i(
+                TAG,
+                "sheet3 是否存在：$sheet3Exists"
+            )
+
+            if (!sheet1HasData) {
+
+                val message =
+                    "sheet1.xml 存在，但没有检测到账单数据行"
+
+                AppLogger.e(
+                    TAG,
+                    message
+                )
+
+                return ValidationResult(
+                    valid = false,
+                    message = message,
+                    entryCount = entries.size,
+                    sheet1HasData = false,
+                    sheet2Exists = sheet2Exists,
+                    sheet3Exists = sheet3Exists
+                )
+            }
+
+            val message =
+                "XLSX 结构完整，sheet1/sheet2/sheet3 均存在，sheet1 检测到账单数据"
+
+            AppLogger.i(
+                TAG,
+                message
+            )
+
+            return ValidationResult(
+                valid = true,
+                message = message,
+                entryCount = entries.size,
+                sheet1HasData = true,
+                sheet2Exists = sheet2Exists,
+                sheet3Exists = sheet3Exists
+            )
+
+        } catch (e: Exception) {
+
+            AppLogger.e(
+                TAG,
+                "validate() 验证 XLSX 时发生异常",
+                e
+            )
+
+            return ValidationResult(
+                valid = false,
+                message =
+                    "验证异常：${e.message ?: "未知错误"}",
+                entryCount = entries.size,
+                sheet1HasData = false,
+                sheet2Exists =
+                    entries.containsKey(
+                        "xl/worksheets/sheet2.xml"
+                    ),
+                sheet3Exists =
+                    entries.containsKey(
+                        "xl/worksheets/sheet3.xml"
+                    )
+            )
+        }
     }
 
     // =============================================================
