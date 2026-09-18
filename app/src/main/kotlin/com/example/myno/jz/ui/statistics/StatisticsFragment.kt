@@ -1446,29 +1446,30 @@ private fun updateTrendTabStyle() {
                 )
             }
 
-        val amount =
-            TextView(context).apply {
+ val amount =
+    TextView(context).apply {
 
-                text =
-                    "¥${moneyFormat.format(item.amount)}"
+        text =
+            "¥${moneyFormat.format(item.amount)}"
 
-                textSize = 11f
+        textSize = 11f
 
-                setTextColor(
-                    ContextCompat.getColor(
-                        context,
-                        R.color.text_secondary
-                    )
+        setTextColor(
+            ContextCompat.getColor(
+                context,
+                R.color.text_secondary
+            )
+        )
 
-                layoutParams =
-                    LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    ).apply {
-                        topMargin =
-                            dp(3)
-                    }
+        layoutParams =
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                topMargin =
+                    dp(3)
             }
+    }
 
         info.addView(name)
         info.addView(amount)
