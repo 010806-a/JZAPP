@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myno.jz.data.repository.PrivacyLockStore
 import com.example.myno.jz.databinding.FragmentChangePatternBinding
@@ -15,9 +14,7 @@ class ChangePatternFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var lockStore: PrivacyLockStore
-
-    private var firstPattern: String? = null
-    private var waitingForSecondPattern = false
+    private lateinit var patternHelper: PatternSetupHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,13 +41,26 @@ class ChangePatternFragment : Fragment() {
         lockStore =
             PrivacyLockStore(requireContext())
 
+        patternHelper =
+            PatternSetupHelper(
+                context = requireContext(),
+                lockStore = lockStore,
+                statusView = binding.tvStatus,
+                resetPattern = {
+                    binding.patternLockView.resetPattern()
+                },
+                successMessage = "图案修改成功",
+                failureMessage = "图案修改失败"
+            ) {
+                parentFragmentManager.popBackStack()
+            }
+
         setup()
     }
 
     private fun setup() {
 
         binding.btnBack.setOnClickListener {
-
             parentFragmentManager.popBackStack()
         }
 
@@ -62,86 +72,10 @@ class ChangePatternFragment : Fragment() {
                     override fun onPatternComplete(
                         pattern: String
                     ) {
-
-                        handlePattern(pattern)
+                        patternHelper.handle(pattern)
                     }
                 }
             )
-    }
-
-    private fun handlePattern(
-        pattern: String
-    ) {
-
-        val pointCount =
-            pattern.split("-").size
-
-        if (pointCount < 4) {
-
-            binding.tvStatus.text =
-                "图案至少需要连接4个点"
-
-            binding.patternLockView.resetPattern()
-
-            return
-        }
-
-        if (!waitingForSecondPattern) {
-
-            firstPattern = pattern
-
-            waitingForSecondPattern = true
-
-            binding.tvStatus.text =
-                "图案已记录，请再次绘制相同图案确认"
-
-            binding.patternLockView.resetPattern()
-
-            return
-        }
-
-        if (pattern != firstPattern) {
-
-            firstPattern = null
-
-            waitingForSecondPattern = false
-
-            binding.tvStatus.text =
-                "两次图案不一致，请重新设置"
-
-            binding.patternLockView.resetPattern()
-
-            return
-        }
-
-        savePattern(pattern)
-    }
-
-    private fun savePattern(
-        pattern: String
-    ) {
-
-        val success =
-            lockStore.savePattern(pattern)
-
-        if (!success) {
-
-            Toast.makeText(
-                requireContext(),
-                "图案修改失败",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            return
-        }
-
-        Toast.makeText(
-            requireContext(),
-            "图案修改成功",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {

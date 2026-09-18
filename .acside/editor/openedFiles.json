@@ -1,35 +1,110 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/utils/ExcelExporter.kt",
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/assets/AssetsFragment.kt",
       "selection": {
         "end": {
           "column": 1,
-          "index": 19576,
-          "line": 781
+          "index": 10467,
+          "line": 458
         },
         "start": {
           "column": 1,
-          "index": 19576,
-          "line": 781
+          "index": 10467,
+          "line": 458
         }
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/backup/BackupFragment.kt",
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/PasswordSetupHelper.kt",
       "selection": {
         "end": {
-          "column": 35,
-          "index": 2205,
-          "line": 92
+          "column": 1,
+          "index": 1367,
+          "line": 61
         },
         "start": {
-          "column": 35,
-          "index": 2205,
-          "line": 92
+          "column": 1,
+          "index": 1367,
+          "line": 61
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/PatternSetupHelper.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 1805,
+          "line": 88
+        },
+        "start": {
+          "column": 1,
+          "index": 1805,
+          "line": 88
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ChangePasswordFragment.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 1833,
+          "line": 76
+        },
+        "start": {
+          "column": 1,
+          "index": 1833,
+          "line": 76
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPasswordFragment.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 1831,
+          "line": 76
+        },
+        "start": {
+          "column": 1,
+          "index": 1831,
+          "line": 76
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ChangePatternFragment.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 2261,
+          "line": 86
+        },
+        "start": {
+          "column": 1,
+          "index": 2261,
+          "line": 86
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPatternFragment.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 2257,
+          "line": 86
+        },
+        "start": {
+          "column": 1,
+          "index": 2257,
+          "line": 86
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/utils/ExcelExporter.kt"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPatternFragment.kt"
 }
