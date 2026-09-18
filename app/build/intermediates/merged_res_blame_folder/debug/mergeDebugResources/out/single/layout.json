@@ -1,0 +1,162 @@
+[
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_reset_password.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_reset_password.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_change_password.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_password.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_bill_detail.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_bill_detail.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_account_flow.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_account_flow.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_privacy_lock_verify.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock_verify.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_account_detail.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_detail.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_email_verification.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_email_verification.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_add_bill.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_add_bill.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_home.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_transfer_detail.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_transfer_detail.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_budget.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_budget.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_import_bill.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_import_bill.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/activity_main.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_account_flow_date.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_account_flow_date.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_bill.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_bill.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/activity_budget.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/activity_budget.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_category_manage.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_category_manage.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_reset_pattern.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_reset_pattern.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_settings.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_assets.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_assets.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_email_config.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_email_config.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_category_manage.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_category_manage.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_account_settings.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_settings.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_import_preview.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_import_preview.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_mine.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_mine.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_edit_transfer.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_edit_transfer.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_statistics.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_statistics.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_change_security.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_security.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/activity_quick_entry.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/activity_quick_entry.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_bills.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_bills.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_transfer.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_transfer.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_add_account.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_add_account.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_change_pattern.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_pattern.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_quick_action.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_quick_action.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_bill_home.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_bill_home.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_privacy_lock.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_backup.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_backup.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/item_import_preview.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/item_import_preview.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_account_flow.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_flow.xml"
+    },
+    {
+        "merged": "com.example.myno.jz.app-mergeDebugResources-43:/layout/fragment_budget_manage.xml",
+        "source": "com.example.myno.jz.app-main-46:/layout/fragment_budget_manage.xml"
+    }
+]

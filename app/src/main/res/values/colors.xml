@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <color name="expense_color">#E85D5D</color>
+    <color name="income_color">#35A66F</color>
+
+    <color name="primary">#4F6EF7</color>
+    <color name="primary_dark">#3955C8</color>
+
+    <color name="background">#F7F8FC</color>
+    <color name="surface">#FFFFFF</color>
+
+    <color name="text_primary">#1F2430</color>
+    <color name="text_secondary">#8A909F</color>
+
+    <color name="divider">#E9EBF0</color>
+
+    <color name="income">#22A06B</color>
+    <color name="expense">#E85D75</color>
+
+</resources>

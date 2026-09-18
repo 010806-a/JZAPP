@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:colorBackground"
+    android:fillViewport="true"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- 个人信息：目前只是占位入口，保留以免影响未完成功能。 -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:text="￥"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的记账本"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="本地数据 · 完全离线"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="›"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="数据"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/itemExport"
+                    style="@style/MoneyBookSettingsRow"
+                    android:contentDescription="导出账单">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="↗" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="导出账单" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemBackup"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="↓" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="备份与恢复" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemStatistics"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="▥" />
+                    <LinearLayout style="@style/MoneyBookRowTextContainer">
+                        <TextView style="@style/MoneyBookRowTitle" android:text="更多数据统计" />
+                        <TextView style="@style/MoneyBookRowSubtitle" android:text="更多统计功能开发中" />
+                    </LinearLayout>
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="账户与安全"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/itemAccount"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="▣" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="账户管理" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemCategory"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="▦" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="分类管理" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemBudget"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="¥" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="预算管理" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemPrivacyLock"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="🔒" />
+                    <LinearLayout style="@style/MoneyBookRowTextContainer">
+                        <TextView style="@style/MoneyBookRowTitle" android:text="隐私锁" />
+                        <TextView android:id="@+id/tvLockStatus" style="@style/MoneyBookRowSubtitle" android:text="保护你的账本数据" />
+                    </LinearLayout>
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemChangePassword"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="🔑" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="修改密码 / 图案" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemEmailConfig"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="✉" />
+                    <LinearLayout style="@style/MoneyBookRowTextContainer">
+                        <TextView style="@style/MoneyBookRowTitle" android:text="邮箱安全验证" />
+                        <TextView android:id="@+id/tvEmailStatus" style="@style/MoneyBookRowSubtitle" android:text="用于账户安全验证" />
+                    </LinearLayout>
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="20dp"
+            android:text="偏好与帮助"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/itemSettings"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="⚙" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="设置" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemAbout"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="ⓘ" />
+                    <TextView style="@style/MoneyBookRowTitle" android:text="关于 MoneyBook" />
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+                <View style="@style/MoneyBookRowDivider" />
+
+                <LinearLayout
+                    android:id="@+id/itemFeedback"
+                    style="@style/MoneyBookSettingsRow">
+                    <TextView style="@style/MoneyBookRowIcon" android:text="✉" />
+                    <LinearLayout style="@style/MoneyBookRowTextContainer">
+                        <TextView style="@style/MoneyBookRowTitle" android:text="意见反馈" />
+                        <TextView style="@style/MoneyBookRowSubtitle" android:text="反馈功能开发中" />
+                    </LinearLayout>
+                    <TextView style="@style/MoneyBookRowArrow" android:text="›" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="MoneyBook · 本地记账"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

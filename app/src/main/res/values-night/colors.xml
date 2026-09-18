@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- 收支颜色 -->
+    <color name="expense_color">#FF6B6B</color>
+    <color name="income_color">#4FD18B</color>
+
+    <!-- 主色 -->
+    <color name="primary">#8FA2FF</color>
+    <color name="primary_dark">#6F82E8</color>
+
+    <!-- 背景 -->
+    <color name="background">#101218</color>
+    <color name="surface">#191C24</color>
+
+    <!-- 文字 -->
+    <color name="text_primary">#F2F3F7</color>
+    <color name="text_secondary">#9DA3B0</color>
+
+    <!-- 分割线 -->
+    <color name="divider">#2A2E38</color>
+
+    <!-- 收支 -->
+    <color name="income">#4FD18B</color>
+    <color name="expense">#FF6B7A</color>
+
+</resources>

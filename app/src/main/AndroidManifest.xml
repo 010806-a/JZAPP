@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".MoneyBookApplication"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.MoneyBook">
+
+        <!-- 快速记一笔专用 Activity -->
+        <activity
+            android:name=".ui.quick.QuickEntryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MoneyBook" />
+
+        <!-- 主 Activity -->
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true">
+
+            <intent-filter>
+
+                <action
+                    android:name="android.intent.action.MAIN" />
+
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+
+            <!-- 应用桌面长按快捷方式 -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+
+        </activity>
+
+    </application>
+
+</manifest>

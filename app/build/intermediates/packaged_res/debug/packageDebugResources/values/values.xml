@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#F7F8FC</color>
+    <color name="divider">#E9EBF0</color>
+    <color name="expense">#E85D75</color>
+    <color name="expense_color">#E85D5D</color>
+    <color name="income">#22A06B</color>
+    <color name="income_color">#35A66F</color>
+    <color name="primary">#4F6EF7</color>
+    <color name="primary_dark">#3955C8</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#1F2430</color>
+    <color name="text_secondary">#8A909F</color>
+    <string name="add_bill">记一笔</string>
+    <string name="app_name">MoneyBook</string>
+    <string name="assets">资产</string>
+    <string name="balance">结余</string>
+    <string name="bills">账单</string>
+    <string name="expense">支出</string>
+    <string name="home">首页</string>
+    <string name="income">收入</string>
+    <string name="mine">我的</string>
+    <string name="monthly_budget">本月预算</string>
+    <string name="shortcut_quick_entry">快速记一笔</string>
+    <string name="statistics">统计</string>
+    <string name="total_assets">总资产</string>
+    <style name="BottomNavigationText" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">12sp</item>
+        <item name="android:includeFontPadding">true</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="MoneyBookRowArrow">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    <style name="MoneyBookRowDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">52dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+    <style name="MoneyBookRowIcon">
+        <item name="android:layout_width">40dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    <style name="MoneyBookRowSubtitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+    <style name="MoneyBookRowTextContainer">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+    <style name="MoneyBookRowTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+    <style name="MoneyBookSettingsRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+    <style name="Theme.MoneyBook" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <item name="android:fontFamily">sans</item>
+
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:statusBarColor">@color/background</item>
+
+        <item name="android:navigationBarColor">@color/background</item>
+
+        <item name="android:windowActionModeOverlay">true</item>
+
+        <item name="colorPrimary">@color/primary</item>
+
+        <item name="colorPrimaryContainer">@color/primary</item>
+
+        <item name="android:colorAccent">@color/primary</item>
+
+    </style>
+</resources>
