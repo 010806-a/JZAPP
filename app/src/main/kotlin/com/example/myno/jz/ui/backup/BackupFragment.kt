@@ -89,8 +89,8 @@ override fun onViewCreated(
     financeRepository =
         FinanceRepository(requireContext())
 
-    excelExporter =
-        ExcelExporter()
+ excelExporter =
+    ExcelExporter(requireContext())
 
     // 初始化日志系统
     AppLogger.init(requireContext())

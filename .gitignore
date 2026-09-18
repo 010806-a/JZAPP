@@ -1,0 +1,14 @@
+
+# Android build outputs
+/build/
+*/build/
+.gradle/
+*.iml
+.idea/
+local.properties
+
+# Gradle cache
+.gradle/
+
+# AndroidIDE
+.acside/
