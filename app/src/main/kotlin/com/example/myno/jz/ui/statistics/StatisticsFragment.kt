@@ -249,66 +249,62 @@ class StatisticsFragment : Fragment() {
         binding.trendTabs.addView(tab)
     }
 
-    private fun updateTrendTabStyle() {
+private fun updateTrendTabStyle() {
 
-        for (index in 0 until binding.trendTabs.childCount) {
+    for (index in 0 until binding.trendTabs.childCount) {
 
-            val tab =
-                binding.trendTabs.getChildAt(index)
-                        as TextView
+        val tab =
+            binding.trendTabs.getChildAt(index) as TextView
 
-            val type =
-                when (index) {
-                    0 -> TrendType.EXPENSE
-                    1 -> TrendType.INCOME
-                    else -> TrendType.BALANCE
-                }
-
-            if (type == currentTrendType) {
-
-                tab.setBackgroundColor(
-                    Color.TRANSPARENT
-                )
-
-                tab.background =
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.bg_quick_action
-                    )
-
-                tab.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.primary
-                    )
-                )
-
-                tab.setTypeface(
-                    null,
-                    android.graphics.Typeface.BOLD
-                )
-
-            } else {
-
-                tab.background =
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.bg_bill_summary_clip
-                    )
-
-                tab.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.text_secondary
-                    )
-
-                tab.setTypeface(
-                    null,
-                    android.graphics.Typeface.NORMAL
-                )
+        val type =
+            when (index) {
+                0 -> TrendType.EXPENSE
+                1 -> TrendType.INCOME
+                else -> TrendType.BALANCE
             }
+
+        if (type == currentTrendType) {
+
+            tab.background =
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.bg_quick_action
+                )
+
+            tab.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.primary
+                )
+            )
+
+            tab.setTypeface(
+                null,
+                android.graphics.Typeface.BOLD
+            )
+
+        } else {
+
+            tab.background =
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.bg_bill_summary_clip
+                )
+
+            tab.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.text_secondary
+                )
+            )
+
+            tab.setTypeface(
+                null,
+                android.graphics.Typeface.NORMAL
+            )
         }
     }
+}
 
     /**
      * 圆环图初始化。
