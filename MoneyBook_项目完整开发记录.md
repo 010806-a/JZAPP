@@ -1,6 +1,7 @@
 # MoneyBook 项目完整开发记录
 
 > 最后更新：2026-09-16（本次为**全量代码核对更新 + 账单/首页 UI 重构更新**——通读了 `JZ_backup_20260916_031727.zip` 中全部 84 个 Kotlin 文件后重写，纠正了旧文档严重落后于实际代码的问题）
+> **2026-09-18 补充审查（只读，未改代码）：** 通读 `JZ_backup_20260918_120622.zip` 全部 85 个 Kotlin 文件，确认文件结构与 09-16 相比没有增减；09-16 记录的 `MineFragment` 密码入口命名不一致问题已修复；其余结构性问题（`HomeFragment` 臃肿、`ImportPreviewFragment` 职责混杂、`AssetsFragment` 手写 View、`BackupRepository` 范围不全、密码/图案 Fragment 重复代码、`JsonDataStore` 重复 CRUD）原样存在，且硬编码中文文件数由 36/85 上升到 43/85。详见 `REFACTOR_20260918.md`。
 > 项目名称：MoneyBook
 > 项目目录：JZ
 > applicationId / namespace：`com.example.myno.jz`
@@ -796,9 +797,9 @@ clearAllData()
 | JSON 本地存储 / Gson | 已完成 | `JsonDataStore` + 既有 JSON 文件结构保留 |
 | Bill / Account / Transfer / Category / Budget 模型 | 已完成 | 字段语义未改 |
 | AppSettings / FinanceRepository / MainViewModel / MainActivity | 已完成 | 核心架构保留 |
-| 首页（快捷操作、分类环形图、最近账单） | 已完成 | 未做破坏性拆分 |
+| 首页（快捷操作、分类环形图、最近账单） | 已完成 | 未做破坏性拆分；**09-18 复核：`HomeFragment` 仍 2031 行、职责过多，"日历账单"入口实际打开普通账单列表，见 `REFACTOR_20260918.md`** |
 | 账单新增 / 详情 / 列表 | 已完成 | 保留现有入口和筛选逻辑 |
-| 资产页 / 账户详情 / 流水 / 新增 / 设置 | 已完成 | 账户关联继续使用 `Account.id` |
+| 资产页 / 账户详情 / 流水 / 新增 / 设置 | 已完成 | 账户关联继续使用 `Account.id`；**09-18 复核：账户卡片仍是手写 `LinearLayout`/`addView`（非 RecyclerView），且图标/间距为裸像素值未做 dp 转换** |
 | 转账 / 详情 / 编辑 / 删除 | 已完成 | `Transfer` 不计入收支统计 |
 | CSV / XLSX 导入 / 预览 / 重复检测 / 转账识别 | 已完成 | 导入链路保留 |
 | 默认账户 / 默认分类 / 默认记账类型 / 记账后行为 | 已完成 | 设置保存逻辑保留 |
@@ -811,11 +812,14 @@ clearAllData()
 | 崩溃捕获 / 本地日志 | 已完成 | `CrashHandler` + `AppLogger` |
 | 主题切换 / 动画设置 | 已完成 | 设置端可保存 |
 | 设置页代码/布局瘦身 | **已完成（本次）** | 单选 Dialog 与重复 Row/Card Style 已统一 |
-| 备份恢复 | 部分完成 | 当前只处理 `records.json`，其余核心 JSON 尚未纳入 |
+| 备份恢复 | 部分完成 | 当前只处理 `records.json`，其余核心 JSON 尚未纳入（09-18 复核：问题原样存在，属于数据安全风险，建议优先处理） |
 | Excel 导出 | 未实现 | `ExcelExporter.kt` 仍为空类，保留占位 |
 | 自然语言记账 | 未实现 | `NaturalLanguageParser.kt` 仍为空类，未接入入口 |
 | 日期格式 / 金额小数位全局应用 | 未完成 | 设置可保存，但显示层尚未全面读取 |
 | Android 正式编译验证 | 未完成 | 当前环境无法联网下载 Gradle 9.0.0 |
+| "我的"页"数据统计"入口 | **接线未完成** | 点击仍是占位 Toast，但底部导航"统计" Tab 功能已完整实现，属于低成本可修复问题（09-18 新记录） |
+| 密码/图案 修改与重置代码重复 | 未处理 | `ChangePasswordFragment`/`ResetPasswordFragment`、`ChangePatternFragment`/`ResetPatternFragment` 各自一对代码 90% 以上相同（09-18 新记录） |
+| `JsonDataStore` CRUD 重复 | 未处理 | Bill/Account/Category/Budget/Transfer 五组 get/save/add/update/delete 结构高度相似，可用泛型收敛（09-18 新记录） |
 
 ## 19. 当前开发路线
 
@@ -885,6 +889,13 @@ AI 应该首先：
 ---
 
 ## 21. 项目变更日志
+
+### 2026-09-18 — 全量只读审查（未修改代码）
+- 通读 `JZ_backup_20260918_120622.zip` 全部 85 个 Kotlin 文件，确认文件结构相对 09-16 无增减。
+- 确认 09-16 记录的 `MineFragment` 密码入口命名不一致问题已修复。
+- 确认 `HomeFragment` 臃肿、`ImportPreviewFragment` 职责混杂、`AssetsFragment` 手写 View、`BackupRepository` 范围不全、密码/图案 Fragment 重复、`JsonDataStore` 重复 CRUD 等问题原样存在。
+- 新发现：`AssetsFragment` 账户卡片使用裸像素值，未做 dp 转换；硬编码中文文件数由 36/85 升至 43/85。
+- 完整细节与逐页功能状态见 `REFACTOR_20260918.md`。
 
 ### 2026-09-16 — 第二阶段：设置页与资源层瘦身
 - `SettingsFragment.kt`：将 7 组重复的单选设置弹窗统一为 `showChoiceDialog()`，保留原有选项、默认值映射和保存逻辑。

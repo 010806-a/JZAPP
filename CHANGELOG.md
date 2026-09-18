@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-09-18 — 全量只读审查（功能状态 + 代码质量）
+
+详见 `REFACTOR_20260918.md`。本次未修改任何源码，仅核对最新 `JZ_backup_20260918_120622.zip`。
+
+### 确认已修复
+- `MineFragment` "修改密码"入口命名与跳转不一致的问题（09-16 记录）已修复：`itemChangePassword` 现在明确调用 `openChangeSecurity()` → `ChangeSecurityFragment`。
+
+### 确认仍未处理（09-16 报告中的问题原样存在）
+- `HomeFragment`（2031 行）职责过多、`showCategoryBudgetDialog` 单方法 362 行。
+- 首页快捷操作"日历账单"实际打开的是普通账单列表，无独立日历视图。
+- `MineFragment`"数据统计"入口仍是占位 Toast，尽管底部导航的统计 Tab 功能已完整实现。
+- `AssetsFragment` 仍用手写 `LinearLayout`/`addView` 拼接账户卡片，未用 RecyclerView。
+- `ImportPreviewFragment`（1920 行）UI 与账户匹配算法混杂。
+- `ChangePasswordFragment`/`ResetPasswordFragment`、`ChangePatternFragment`/`ResetPatternFragment` 大段重复代码。
+- `FinanceRepository`/`JsonDataStore` 中 Bill/Account/Category/Budget/Transfer 五组近乎相同的 CRUD。
+- `BackupRepository` 仍只备份 `records.json`，账户/分类/预算/转账/设置未纳入。
+
+### 新发现
+- `AssetsFragment.createAccountCard` 中图标尺寸、间距、内边距均为裸像素数值，未做 dp 转换。
+- 硬编码中文文本的文件数由 36/85 上升至 43/85（`strings.xml` 仍仅 12 条）。
+
 ## 2026-09-16 — 代码核对、两阶段瘦身与文档同步
 
 ### Changed

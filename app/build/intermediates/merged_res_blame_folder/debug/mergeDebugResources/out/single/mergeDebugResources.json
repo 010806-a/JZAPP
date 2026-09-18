@@ -1,446 +1,450 @@
 [
     {
-        "merged": "com.example.myno.jz.app-debug-44:/color_nav_item_color.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/color/nav_item_color.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_arrow_right.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_arrow_right.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_wallet_a.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_wallet_a.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_bill_icon.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_bill_icon.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_wallet.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_wallet.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/xml_shortcuts.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/xml/shortcuts.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_communication.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_communication.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_medical.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_medical.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_statistics_a.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_statistics_a.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_mine.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_mine.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_category_manage.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_category_manage.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_email_config.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_email_config.xml"
+    },
+    {
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_notifications.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_notifications.xml"
+    },
+    {
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-pngs-40:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_launcher_background.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_launcher_background.xml"
     },
     {
         "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_backup.xml.flat",
         "source": "com.example.myno.jz.app-main-46:/layout/fragment_backup.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_add_bill.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_add_bill.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_activity_budget.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/activity_budget.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_privacy_lock.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_arrow_back.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_arrow_back.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_activity_main.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/activity_main.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_privacy_lock.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_file_import.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_file_import.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_visibility.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_visibility.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_email_verification.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_email_verification.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_quick_action.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_quick_action.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_import_bill.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_import_bill.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_travel.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_travel.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_calendar.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_calendar.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_bill_detail.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_bill_detail.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_transport.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_transport.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_home_money.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_home_money.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_quick_action.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_quick_action.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_budget_manage.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_budget_manage.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_assets.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_assets.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xxxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xxxhdpi/ic_launcher.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_add_ab.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_add_ab.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_wx.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/wx.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_other.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_other.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_home.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_home.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_statistics_a.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_statistics_a.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_empty_bill.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_empty_bill.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_food.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_food.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_arrow_right.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_arrow_right.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/xml_backup_rules.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/xml/backup_rules.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_house.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_house.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_activity_quick_entry.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/activity_quick_entry.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_file_import.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_file_import.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_visibility.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_visibility.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_balance_switch_hint.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_balance_switch_hint.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/color_bill_filter_chip_bg.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/color/bill_filter_chip_bg.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_bill_icon.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_bill_icon.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_budget_manage.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_budget_manage.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_account_flow.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_flow.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_sx.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/sx.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_privacy_lock_verify.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock_verify.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_account_flow.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_account_flow.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_backup.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_backup.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/color_bill_filter_chip_stroke.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/color/bill_filter_chip_stroke.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_zfb.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/zfb.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_activity_budget.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/activity_budget.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xxhdpi_ic_launcher.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xxhdpi/ic_launcher.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_account_flow.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_account_flow.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_category_manage.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_category_manage.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_bill.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_bill.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_category_manage.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_category_manage.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_add_ab.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_add_ab.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_settings.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_settings.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_settings.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_settings.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_activity_quick_entry.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/activity_quick_entry.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_yxk.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/yxk.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_food.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_food.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_education.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_education.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_xj.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/xj.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xhdpi/ic_launcher_round.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_bill_summary_clip.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_bill_summary_clip.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_change_security.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_security.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_visibility_off.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_visibility_off.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_entertainment.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_entertainment.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_chart.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_chart.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_account_flow_date.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_account_flow_date.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_transfer.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_transfer.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_arrow_down.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_arrow_down.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/color_bill_filter_chip_text.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/color/bill_filter_chip_text.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_email_verification.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_email_verification.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_change_password.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_change_password.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xhdpi/ic_launcher.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_back.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_back.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-hdpi/ic_launcher_round.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_arrow_back.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_arrow_back.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_calendar.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_calendar.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/menu_bottom_navigation_menu.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/menu/bottom_navigation_menu.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_sx.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/sx.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_home.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_home.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_quick_action_delete.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_quick_action_delete.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_reset_password.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_reset_password.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_spinner.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_spinner.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/xml_shortcuts.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/xml/shortcuts.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_shopping.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_shopping.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_add_a.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_add_a.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/xml_data_extraction_rules.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/xml/data_extraction_rules.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_add.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_add.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_account_detail.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_account_detail.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_quick_action.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_quick_action.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_bill.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_bill.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_change_password.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_password.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_empty_bill.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_empty_bill.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_edit_transfer.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_edit_transfer.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_wx.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/wx.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_visibility_off.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_visibility_off.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_change_security.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_change_security.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_email_config.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_email_config.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_add_a.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_add_a.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/color_bill_filter_chip_text.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/color/bill_filter_chip_text.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_xj.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/xj.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-mdpi/ic_launcher.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_change_pattern.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_change_pattern.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_add_bill.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_add_bill.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-mdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_assets.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_assets.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_travel.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_travel.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_statistics.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_statistics.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_home.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_home.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/xml_data_extraction_rules.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/xml/data_extraction_rules.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_quick_add.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_quick_add.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_education.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_education.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-hdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/menu_bottom_navigation_menu.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/menu/bottom_navigation_menu.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_salary.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_salary.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_chart.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_chart.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_bill_home.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_bill_home.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_bills.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_bills.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/color_nav_item_color.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/color/nav_item_color.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_change_pattern.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_change_pattern.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_wallet_a.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_wallet_a.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_yxk.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/yxk.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-mdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_salary.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_salary.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_settings.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_settings.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_bill_home.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_bill_home.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_house.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_house.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_import_bill.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_import_bill.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_bills.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_bills.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_home_money_a.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_home_money_a.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_reset_pattern.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_reset_pattern.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_spinner.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_spinner.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_import_bill_button.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_import_bill_button.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_quick_add.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_quick_add.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_quick_action_delete.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_quick_action_delete.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_zfb.png.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/zfb.png"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_balance_switch_hint.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_balance_switch_hint.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/color_bill_filter_chip_bg.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/color/bill_filter_chip_bg.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_import_preview.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_import_preview.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-xxhdpi/ic_launcher_round.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_account_settings.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_account_settings.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_income.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_income.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_home_money.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_home_money.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_other.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_other.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_bill_detail.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_bill_detail.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-mdpi_ic_launcher_round.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-mdpi/ic_launcher_round.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xxxhdpi/ic_launcher.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_settings.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_settings.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-xxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-hdpi_ic_launcher.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-hdpi/ic_launcher.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_add_account.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_add_account.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_import_preview.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_import_preview.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_statistics.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_statistics.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_reset_pattern.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_reset_pattern.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_privacy_lock_verify.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_privacy_lock_verify.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_add_account.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_add_account.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_income.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_income.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_transport.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_transport.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_import_preview.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_import_preview.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_notifications.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_notifications.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_account_flow.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_account_flow.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_account_settings.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_settings.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_import_bill_button.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_import_bill_button.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_arrow_down.png.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_arrow_down.png"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_activity_main.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/activity_main.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_add.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_add.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_transfer_detail.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_transfer_detail.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_bill.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_bill.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
-        "source": "com.example.myno.jz.app-pngs-40:/drawable-anydpi-v24/ic_launcher_foreground.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_statistics.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_statistics.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_expense.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_expense.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_bg_home_money_a.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/bg_home_money_a.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_statistics.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_statistics.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_entertainment.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_entertainment.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_import_preview.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_import_preview.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_wallet.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_wallet.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_account_detail.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_account_detail.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_reset_password.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_reset_password.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_shopping.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_shopping.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_budget.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_budget.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/xml_backup_rules.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/xml/backup_rules.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_quick_action.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_quick_action.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_category_medical.webp.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_category_medical.webp"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_expense.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_expense.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_transfer.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_transfer.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/color_bill_filter_chip_stroke.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/color/bill_filter_chip_stroke.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_back.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_back.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_category_manage.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_category_manage.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_fragment_mine.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/fragment_mine.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/mipmap-hdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_home.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_home.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/drawable_ic_category_communication.webp.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/drawable/ic_category_communication.webp"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/ic_launcher_background.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_edit_transfer.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_edit_transfer.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_bill.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_bill.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_item_account_flow_date.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/item_account_flow_date.xml"
     },
     {
-        "merged": "com.example.myno.jz.app-debug-44:/layout_item_budget.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/layout/item_budget.xml"
-    },
-    {
-        "merged": "com.example.myno.jz.app-debug-44:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/mipmap-anydpi-v26/ic_launcher.xml"
-    },
-    {
-        "merged": "com.example.myno.jz.app-debug-44:/drawable_bg_bill_summary_clip.xml.flat",
-        "source": "com.example.myno.jz.app-main-46:/drawable/bg_bill_summary_clip.xml"
+        "merged": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-debug-44:/layout_fragment_transfer_detail.xml.flat",
+        "source": "/data/user/0/com.tom.rv2ide/files/home/.gradle/daemon/9.0.0/com.example.myno.jz.app-main-46:/layout/fragment_transfer_detail.xml"
     }
 ]

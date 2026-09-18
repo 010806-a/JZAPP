@@ -79,12 +79,14 @@ id btnDisable
 id btnEdit
 id btnEditConfig
 id btnExpense
+id btnExportExcel
 id btnFilter
 id btnImportBill
 id btnIncome
 id btnNextMonth
 id btnNotification
 id btnPreviousMonth
+id btnRestore
 id btnSave
 id btnSelectAll
 id btnSelectFile
@@ -217,6 +219,7 @@ id tvAccountTitle
 id tvAfterAdd
 id tvAmount
 id tvAnimationValue
+id tvBackupInfo
 id tvBackupList
 id tvBalance
 id tvBalanceSwitchHint
@@ -389,6 +392,7 @@ style MoneyBookRowIcon
 style MoneyBookRowSubtitle
 style MoneyBookRowTextContainer
 style MoneyBookRowTitle
+style MoneyBookSettingsCard
 style MoneyBookSettingsRow
 style Theme.MoneyBook
 xml backup_rules

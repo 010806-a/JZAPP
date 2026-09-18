@@ -68,7 +68,7 @@ private val allQuickActions by lazy {
         ),
         QuickAction(
             id = "calendar",
-            title = "日历账单",
+            title = "账单列表",
             iconRes = R.drawable.ic_calendar,
             order = 3
         ),

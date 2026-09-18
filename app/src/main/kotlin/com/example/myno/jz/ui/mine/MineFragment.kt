@@ -21,6 +21,7 @@ import com.example.myno.jz.ui.privacy.ChangePatternFragment
 import com.example.myno.jz.ui.privacy.ChangeSecurityFragment
 import com.example.myno.jz.ui.privacy.PrivacyLockFragment
 import com.example.myno.jz.ui.settings.SettingsFragment
+import com.example.myno.jz.ui.statistics.StatisticsFragment
 
 class MineFragment : Fragment() {
 
@@ -65,29 +66,74 @@ class MineFragment : Fragment() {
 
     private fun setupEmailStatus() {
         val config = EmailConfigStore(requireContext()).getConfig()
+
         binding.tvEmailStatus.text = when {
-            config.verified && config.email.isNotBlank() -> "${config.email} · 已验证"
-            config.configured && config.email.isNotBlank() -> "${config.email} · 待验证"
-            else -> "用于账户安全验证"
+            config.verified && config.email.isNotBlank() ->
+                "${config.email} · 已验证"
+
+            config.configured && config.email.isNotBlank() ->
+                "${config.email} · 待验证"
+
+            else ->
+                "用于账户安全验证"
         }
     }
 
     private fun setupClickEvents() = with(binding) {
-        cardProfile.setOnClickListener { showComingSoon("个人信息") }
-        itemExport.setOnClickListener { showComingSoon("导出账单") }
-        itemBackup.setOnClickListener { parentFragmentManager.openScreen(BackupFragment()) }
-        itemStatistics.setOnClickListener { showComingSoon("数据统计") }
-        itemPrivacyLock.setOnClickListener {
-            openEmailVerification(EmailVerificationFragment.ACTION_PRIVACY_LOCK)
+        cardProfile.setOnClickListener {
+            showComingSoon("个人信息")
         }
-        itemChangePassword.setOnClickListener { openChangeSecurity() }
-        itemEmailConfig.setOnClickListener { openEmailConfig() }
-        itemCategory.setOnClickListener { parentFragmentManager.openScreen(CategoryManageFragment()) }
-        itemBudget.setOnClickListener { parentFragmentManager.openScreen(BudgetManageFragment()) }
-        itemAccount.setOnClickListener { parentFragmentManager.openScreen(AssetsFragment()) }
-        itemSettings.setOnClickListener { parentFragmentManager.openScreen(SettingsFragment()) }
-        itemAbout.setOnClickListener { showAbout() }
-        itemFeedback.setOnClickListener { showComingSoon("意见反馈") }
+
+        itemExport.setOnClickListener {
+            showComingSoon("导出账单")
+        }
+
+        itemBackup.setOnClickListener {
+            parentFragmentManager.openScreen(BackupFragment())
+        }
+
+        // 数据统计：直接进入现有的完整统计页面
+        itemStatistics.setOnClickListener {
+            parentFragmentManager.openScreen(StatisticsFragment())
+        }
+
+        itemPrivacyLock.setOnClickListener {
+            openEmailVerification(
+                EmailVerificationFragment.ACTION_PRIVACY_LOCK
+            )
+        }
+
+        itemChangePassword.setOnClickListener {
+            openChangeSecurity()
+        }
+
+        itemEmailConfig.setOnClickListener {
+            openEmailConfig()
+        }
+
+        itemCategory.setOnClickListener {
+            parentFragmentManager.openScreen(CategoryManageFragment())
+        }
+
+        itemBudget.setOnClickListener {
+            parentFragmentManager.openScreen(BudgetManageFragment())
+        }
+
+        itemAccount.setOnClickListener {
+            parentFragmentManager.openScreen(AssetsFragment())
+        }
+
+        itemSettings.setOnClickListener {
+            parentFragmentManager.openScreen(SettingsFragment())
+        }
+
+        itemAbout.setOnClickListener {
+            showAbout()
+        }
+
+        itemFeedback.setOnClickListener {
+            showComingSoon("意见反馈")
+        }
     }
 
     private fun openChangeSecurity() {
@@ -95,7 +141,9 @@ class MineFragment : Fragment() {
     }
 
     private fun openEmailVerification(action: String) {
-        parentFragmentManager.openScreen(EmailVerificationFragment.newInstance(action))
+        parentFragmentManager.openScreen(
+            EmailVerificationFragment.newInstance(action)
+        )
     }
 
     private fun openEmailConfig() {
@@ -129,7 +177,11 @@ class MineFragment : Fragment() {
 
     /** 保留尚未接入的入口，避免误删未完成能力。 */
     private fun showComingSoon(name: String) {
-        Toast.makeText(requireContext(), "${name}功能即将接入", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            "${name}功能即将接入",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onDestroyView() {

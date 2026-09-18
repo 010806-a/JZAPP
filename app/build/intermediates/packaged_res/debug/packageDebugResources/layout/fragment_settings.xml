@@ -57,13 +57,7 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+        <com.google.android.material.card.MaterialCardView style="@style/MoneyBookSettingsCard">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,16 +65,8 @@
                 android:orientation="vertical">
 
                 <!-- 主题 -->
-                <LinearLayout
-                    android:id="@+id/itemTheme"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemTheme">
 
                     <TextView
                         android:layout_width="0dp"
@@ -114,16 +100,8 @@
                     android:background="@color/divider" />
 
                 <!-- 动画 -->
-                <LinearLayout
-                    android:id="@+id/itemAnimation"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemAnimation">
 
                     <TextView
                         android:layout_width="0dp"
@@ -159,13 +137,7 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+        <com.google.android.material.card.MaterialCardView style="@style/MoneyBookSettingsCard">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,16 +145,8 @@
                 android:orientation="vertical">
 
                 <!-- 默认记账类型 -->
-                <LinearLayout
-                    android:id="@+id/itemDefaultType"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemDefaultType">
 
                     <TextView
                         android:layout_width="0dp"
@@ -216,16 +180,8 @@
                     android:background="@color/divider" />
 
                 <!-- 记账成功后 -->
-                <LinearLayout
-                    android:id="@+id/itemAfterAdd"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemAfterAdd">
 
                     <TextView
                         android:layout_width="0dp"
@@ -259,16 +215,8 @@
                     android:background="@color/divider" />
 
                 <!-- 默认账户 -->
-                <LinearLayout
-                    android:id="@+id/itemDefaultAccount"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemDefaultAccount">
 
                     <TextView
                         android:layout_width="0dp"
@@ -302,16 +250,8 @@
                     android:background="@color/divider" />
 
                 <!-- 默认分类 -->
-                <LinearLayout
-                    android:id="@+id/itemDefaultCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemDefaultCategory">
 
                     <TextView
                         android:layout_width="0dp"
@@ -354,13 +294,7 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+        <com.google.android.material.card.MaterialCardView style="@style/MoneyBookSettingsCard">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -368,16 +302,8 @@
                 android:orientation="vertical">
 
                 <!-- 日期格式 -->
-                <LinearLayout
-                    android:id="@+id/itemDateFormat"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemDateFormat">
 
                     <TextView
                         android:layout_width="0dp"
@@ -411,16 +337,8 @@
                     android:background="@color/divider" />
 
                 <!-- 金额小数位 -->
-                <LinearLayout
-                    android:id="@+id/itemDecimal"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                <LinearLayout style="@style/MoneyBookSettingsRow"
+                    android:id="@+id/itemDecimal">
 
                     <TextView
                         android:layout_width="0dp"
@@ -463,24 +381,10 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+        <com.google.android.material.card.MaterialCardView style="@style/MoneyBookSettingsCard">
 
-            <LinearLayout
-                android:id="@+id/itemStatisticsPeriod"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp">
+            <LinearLayout style="@style/MoneyBookSettingsRow"
+                android:id="@+id/itemStatisticsPeriod">
 
                 <TextView
                     android:layout_width="0dp"
@@ -521,13 +425,7 @@
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+        <com.google.android.material.card.MaterialCardView style="@style/MoneyBookSettingsCard">
 
             <LinearLayout
                 android:layout_width="match_parent"

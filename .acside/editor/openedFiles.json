@@ -1,0 +1,35 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/utils/ExcelExporter.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 27649,
+          "line": 1080
+        },
+        "start": {
+          "column": 1,
+          "index": 27649,
+          "line": 1080
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/backup/BackupFragment.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 3958,
+          "line": 168
+        },
+        "start": {
+          "column": 1,
+          "index": 3958,
+          "line": 168
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/utils/ExcelExporter.kt"
+}

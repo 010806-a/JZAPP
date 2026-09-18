@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +19,7 @@ import java.lang.String;
 
 public final class FragmentBackupBinding implements ViewBinding {
   @NonNull
-  private final LinearLayout rootView;
+  private final ScrollView rootView;
 
   @NonNull
   public final ImageButton btnBack;
@@ -28,23 +28,36 @@ public final class FragmentBackupBinding implements ViewBinding {
   public final Button btnBackup;
 
   @NonNull
+  public final Button btnExportExcel;
+
+  @NonNull
+  public final Button btnRestore;
+
+  @NonNull
+  public final TextView tvBackupInfo;
+
+  @NonNull
   public final TextView tvBackupList;
 
   @NonNull
   public final TextView tvEmpty;
 
-  private FragmentBackupBinding(@NonNull LinearLayout rootView, @NonNull ImageButton btnBack,
-      @NonNull Button btnBackup, @NonNull TextView tvBackupList, @NonNull TextView tvEmpty) {
+  private FragmentBackupBinding(@NonNull ScrollView rootView, @NonNull ImageButton btnBack,
+      @NonNull Button btnBackup, @NonNull Button btnExportExcel, @NonNull Button btnRestore,
+      @NonNull TextView tvBackupInfo, @NonNull TextView tvBackupList, @NonNull TextView tvEmpty) {
     this.rootView = rootView;
     this.btnBack = btnBack;
     this.btnBackup = btnBackup;
+    this.btnExportExcel = btnExportExcel;
+    this.btnRestore = btnRestore;
+    this.tvBackupInfo = tvBackupInfo;
     this.tvBackupList = tvBackupList;
     this.tvEmpty = tvEmpty;
   }
 
   @Override
   @NonNull
-  public LinearLayout getRoot() {
+  public ScrollView getRoot() {
     return rootView;
   }
 
@@ -81,6 +94,24 @@ public final class FragmentBackupBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.btnExportExcel;
+      Button btnExportExcel = ViewBindings.findChildViewById(rootView, id);
+      if (btnExportExcel == null) {
+        break missingId;
+      }
+
+      id = R.id.btnRestore;
+      Button btnRestore = ViewBindings.findChildViewById(rootView, id);
+      if (btnRestore == null) {
+        break missingId;
+      }
+
+      id = R.id.tvBackupInfo;
+      TextView tvBackupInfo = ViewBindings.findChildViewById(rootView, id);
+      if (tvBackupInfo == null) {
+        break missingId;
+      }
+
       id = R.id.tvBackupList;
       TextView tvBackupList = ViewBindings.findChildViewById(rootView, id);
       if (tvBackupList == null) {
@@ -93,8 +124,8 @@ public final class FragmentBackupBinding implements ViewBinding {
         break missingId;
       }
 
-      return new FragmentBackupBinding((LinearLayout) rootView, btnBack, btnBackup, tvBackupList,
-          tvEmpty);
+      return new FragmentBackupBinding((ScrollView) rootView, btnBack, btnBackup, btnExportExcel,
+          btnRestore, tvBackupInfo, tvBackupList, tvEmpty);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

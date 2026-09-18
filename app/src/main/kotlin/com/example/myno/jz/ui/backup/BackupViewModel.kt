@@ -36,7 +36,7 @@ class BackupViewModel(
             val file = repository.createBackup()
 
             _message.value =
-                "备份成功：${file.name}"
+                "完整备份成功：${file.name}"
 
             loadBackups()
 
@@ -57,7 +57,7 @@ class BackupViewModel(
         if (success) {
 
             _message.value =
-                "恢复成功，请重新进入首页查看数据"
+                "完整数据恢复成功，请重新进入首页查看数据"
 
         } else {
 
