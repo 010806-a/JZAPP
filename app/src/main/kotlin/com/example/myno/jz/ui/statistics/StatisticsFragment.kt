@@ -1,12 +1,17 @@
 package com.example.myno.jz.ui.statistics
 
+import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.myno.jz.R
 import com.example.myno.jz.data.model.Bill
@@ -38,15 +43,23 @@ class StatisticsFragment : Fragment() {
 
     private lateinit var repository: FinanceRepository
 
-    private var currentYear: Int = 0
-    private var currentMonth: Int = 0
+    private var currentYear = 0
+    private var currentMonth = 0
 
     private lateinit var pieChart: PieChart
-    private lateinit var expenseTrendChart: LineChart
-    private lateinit var monthlyTrendChart: LineChart
+    private lateinit var trendChart: LineChart
 
     private val moneyFormat =
         DecimalFormat("#,##0.00")
+
+    private enum class TrendType {
+        EXPENSE,
+        INCOME,
+        BALANCE
+    }
+
+    private var currentTrendType =
+        TrendType.EXPENSE
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +77,8 @@ class StatisticsFragment : Fragment() {
         repository =
             FinanceRepository(requireContext())
 
-        val calendar = Calendar.getInstance()
+        val calendar =
+            Calendar.getInstance()
 
         currentYear =
             calendar.get(Calendar.YEAR)
@@ -73,9 +87,9 @@ class StatisticsFragment : Fragment() {
             calendar.get(Calendar.MONTH) + 1
 
         setupMonthSelector()
+        setupTrendTabs()
         setupPieChart()
-        setupExpenseTrendChart()
-        setupMonthlyTrendChart()
+        setupTrendChart()
 
         updateMonthText()
         refreshStatistics()
@@ -84,210 +98,323 @@ class StatisticsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
 
         if (::pieChart.isInitialized) {
             pieChart.clear()
         }
 
-        if (::expenseTrendChart.isInitialized) {
-            expenseTrendChart.clear()
+        if (::trendChart.isInitialized) {
+            trendChart.clear()
         }
+
+        super.onDestroyView()
 
         _binding = null
     }
-    
-    private fun setupMonthlyTrendChart() {
 
-    monthlyTrendChart =
-        binding.monthlyTrendChart
-
-    monthlyTrendChart.description.isEnabled =
-        false
-
-    monthlyTrendChart.setTouchEnabled(true)
-
-    monthlyTrendChart.setDragEnabled(true)
-
-    monthlyTrendChart.setScaleEnabled(false)
-
-    monthlyTrendChart.setPinchZoom(false)
-
-    monthlyTrendChart.setDoubleTapToZoomEnabled(false)
-
-    monthlyTrendChart.axisRight.isEnabled =
-        false
-
-    monthlyTrendChart.legend.isEnabled =
-        true
-
-    monthlyTrendChart.legend.textSize =
-        12f
-
-    monthlyTrendChart.setExtraOffsets(
-        8f,
-        8f,
-        8f,
-        16f
-    )
-
-    monthlyTrendChart.axisLeft.apply {
-
-        axisMinimum = 0f
-
-        textSize = 11f
-
-        setDrawGridLines(true)
-
-        valueFormatter =
-            object : ValueFormatter() {
-
-                override fun getFormattedValue(
-                    value: Float
-                ): String {
-
-                    return "¥${
-                        moneyFormat.format(
-                            value.toDouble()
-                        )
-                    }"
-                }
-            }
-    }
-
-    monthlyTrendChart.xAxis.apply {
-
-        position =
-            XAxis.XAxisPosition.BOTTOM
-
-        granularity = 1f
-
-        setGranularityEnabled(true)
-
-        setDrawGridLines(false)
-
-        textSize = 10f
-
-        labelRotationAngle = 0f
-    }
-}
-
+    /**
+     * 月份选择
+     *
+     * 点击月份直接打开年月选择器。
+     */
     private fun setupMonthSelector() {
 
-        binding.btnPreviousMonth.setOnClickListener {
-
-            currentMonth--
-
-            if (currentMonth < 1) {
-                currentMonth = 12
-                currentYear--
-            }
-
-            updateMonthText()
-            refreshStatistics()
+        binding.tvMonth.setOnClickListener {
+            showMonthPicker()
         }
 
-        binding.btnNextMonth.setOnClickListener {
-
-            currentMonth++
-
-            if (currentMonth > 12) {
-                currentMonth = 1
-                currentYear++
-            }
-
-            updateMonthText()
-            refreshStatistics()
+        binding.monthSelector.setOnClickListener {
+            showMonthPicker()
         }
     }
 
+    /**
+     * 打开月份选择器。
+     *
+     * DatePickerDialog 只使用年月，
+     * 日期本身不会影响统计结果。
+     */
+    private fun showMonthPicker() {
+
+        val dialog =
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, _ ->
+
+                    currentYear = year
+                    currentMonth = month + 1
+
+                    updateMonthText()
+                    refreshStatistics()
+                },
+                currentYear,
+                currentMonth - 1,
+                1
+            )
+
+        dialog.datePicker.init(
+            currentYear,
+            currentMonth - 1,
+            1,
+            null
+        )
+
+        dialog.show()
+    }
+
+    /**
+     * 显示：
+     * 2026年9月⌄
+     */
     private fun updateMonthText() {
 
         binding.tvMonth.text =
             String.format(
                 Locale.getDefault(),
-                "%d年%02d月",
+                "%d年%d月⌄",
                 currentYear,
                 currentMonth
             )
     }
 
     /**
-     * 饼图初始化
+     * 趋势 Tab。
+     */
+    private fun setupTrendTabs() {
+
+        binding.trendTabs.removeAllViews()
+
+        addTrendTab(
+            title = "支出",
+            type = TrendType.EXPENSE
+        )
+
+        addTrendTab(
+            title = "收入",
+            type = TrendType.INCOME
+        )
+
+        addTrendTab(
+            title = "结余",
+            type = TrendType.BALANCE
+        )
+
+        updateTrendTabStyle()
+    }
+
+    private fun addTrendTab(
+        title: String,
+        type: TrendType
+    ) {
+
+        val tab =
+            TextView(requireContext()).apply {
+
+                text = title
+
+                gravity = Gravity.CENTER
+
+                textSize = 13f
+
+                isClickable = true
+
+                isFocusable = true
+
+                setPadding(
+                    dp(17),
+                    0,
+                    dp(17),
+                    0
+                )
+
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        dp(36)
+                    ).apply {
+                        marginEnd = dp(8)
+                    }
+
+                setOnClickListener {
+
+                    currentTrendType = type
+
+                    updateTrendTabStyle()
+                    updateTrendChart(
+                        repository.getBills()
+                    )
+                }
+            }
+
+        binding.trendTabs.addView(tab)
+    }
+
+    private fun updateTrendTabStyle() {
+
+        for (index in 0 until binding.trendTabs.childCount) {
+
+            val tab =
+                binding.trendTabs.getChildAt(index)
+                        as TextView
+
+            val type =
+                when (index) {
+                    0 -> TrendType.EXPENSE
+                    1 -> TrendType.INCOME
+                    else -> TrendType.BALANCE
+                }
+
+            if (type == currentTrendType) {
+
+                tab.setBackgroundColor(
+                    Color.TRANSPARENT
+                )
+
+                tab.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.bg_quick_action
+                    )
+
+                tab.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.primary
+                    )
+                )
+
+                tab.setTypeface(
+                    null,
+                    android.graphics.Typeface.BOLD
+                )
+
+            } else {
+
+                tab.background =
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.bg_bill_summary_clip
+                    )
+
+                tab.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.text_secondary
+                    )
+
+                tab.setTypeface(
+                    null,
+                    android.graphics.Typeface.NORMAL
+                )
+            }
+        }
+    }
+
+    /**
+     * 圆环图初始化。
      */
     private fun setupPieChart() {
 
-        pieChart = binding.pieChart
+        pieChart =
+            binding.pieChart
 
-        pieChart.description.isEnabled = false
+        pieChart.description.isEnabled =
+            false
 
         pieChart.setUsePercentValues(true)
 
         pieChart.setDrawEntryLabels(false)
 
-        pieChart.isDrawHoleEnabled = true
+        pieChart.isDrawHoleEnabled =
+            true
 
-        pieChart.holeRadius = 58f
+        pieChart.holeRadius =
+            58f
 
-        pieChart.transparentCircleRadius = 62f
+        pieChart.transparentCircleRadius =
+            62f
 
-        pieChart.centerText = "支出"
+        pieChart.centerText =
+            "本月支出"
 
-        pieChart.setCenterTextSize(16f)
+        pieChart.setCenterTextSize(
+            15f
+        )
 
-        pieChart.legend.isEnabled = true
+        pieChart.setCenterTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.text_primary
+            )
+        )
 
-        pieChart.legend.textSize = 12f
+        pieChart.legend.isEnabled =
+            false
 
         pieChart.setExtraOffsets(
             10f,
+            8f,
             10f,
-            10f,
-            10f
+            8f
         )
+
+        pieChart.setDrawSlicesUnderHole(
+            true
+        )
+
+        pieChart.setTouchEnabled(false)
     }
 
     /**
-     * 每日支出趋势图初始化
+     * 趋势图初始化。
      */
-    private fun setupExpenseTrendChart() {
+    private fun setupTrendChart() {
 
-        expenseTrendChart =
+        trendChart =
             binding.expenseTrendChart
 
-        expenseTrendChart.description.isEnabled =
+        trendChart.description.isEnabled =
             false
 
-        expenseTrendChart.setTouchEnabled(true)
+        trendChart.setTouchEnabled(true)
 
-        expenseTrendChart.setDragEnabled(true)
+        trendChart.setDragEnabled(true)
 
-        expenseTrendChart.setScaleEnabled(false)
+        trendChart.setScaleEnabled(false)
 
-        expenseTrendChart.setPinchZoom(false)
+        trendChart.setPinchZoom(false)
 
-        expenseTrendChart.setDoubleTapToZoomEnabled(false)
-
-        expenseTrendChart.axisRight.isEnabled =
+        trendChart.setDoubleTapToZoomEnabled(
             false
-
-        expenseTrendChart.legend.isEnabled =
-            false
-
-        expenseTrendChart.setExtraOffsets(
-            8f,
-            8f,
-            8f,
-            16f
         )
 
-        expenseTrendChart.axisLeft.apply {
+        trendChart.axisRight.isEnabled =
+            false
+
+        trendChart.legend.isEnabled =
+            false
+
+        trendChart.setExtraOffsets(
+            8f,
+            8f,
+            8f,
+            12f
+        )
+
+        trendChart.axisLeft.apply {
 
             axisMinimum = 0f
 
-            textSize = 11f
+            textSize = 10f
 
             setDrawGridLines(true)
+
+            gridColor =
+                Color.rgb(
+                    240,
+                    241,
+                    245
+                )
 
             valueFormatter =
                 object : ValueFormatter() {
@@ -296,16 +423,26 @@ class StatisticsFragment : Fragment() {
                         value: Float
                     ): String {
 
-                        return "¥${
-                            moneyFormat.format(
-                                value.toDouble()
+                        return if (
+                            value >= 10000
+                        ) {
+                            String.format(
+                                Locale.getDefault(),
+                                "¥%.1fw",
+                                value / 10000f
                             )
-                        }"
+                        } else {
+                            String.format(
+                                Locale.getDefault(),
+                                "¥%.0f",
+                                value
+                            )
+                        }
                     }
                 }
         }
 
-        expenseTrendChart.xAxis.apply {
+        trendChart.xAxis.apply {
 
             position =
                 XAxis.XAxisPosition.BOTTOM
@@ -316,25 +453,14 @@ class StatisticsFragment : Fragment() {
 
             setDrawGridLines(false)
 
-            textSize = 10f
+            textSize = 9f
 
             labelRotationAngle = 0f
-
-            valueFormatter =
-                object : ValueFormatter() {
-
-                    override fun getFormattedValue(
-                        value: Float
-                    ): String {
-
-                        return "${value.toInt()}日"
-                    }
-                }
         }
     }
 
     /**
-     * 刷新当前月份全部统计数据
+     * 刷新整个统计页面。
      */
     private fun refreshStatistics() {
 
@@ -344,63 +470,12 @@ class StatisticsFragment : Fragment() {
         val categories =
             repository.getCategories()
 
-        val monthStart =
-            Calendar.getInstance().apply {
-
-                clear()
-
-                set(
-                    currentYear,
-                    currentMonth - 1,
-                    1,
-                    0,
-                    0,
-                    0
-                )
-
-                set(
-                    Calendar.MILLISECOND,
-                    0
-                )
-            }
-
-        val monthEnd =
-            Calendar.getInstance().apply {
-
-                clear()
-
-                set(
-                    currentYear,
-                    currentMonth - 1,
-                    1,
-                    0,
-                    0,
-                    0
-                )
-
-                set(
-                    Calendar.MILLISECOND,
-                    0
-                )
-
-                add(
-                    Calendar.MONTH,
-                    1
-                )
-            }
-
-        val startTime =
-            monthStart.timeInMillis
-
-        val endTime =
-            monthEnd.timeInMillis
-
         val monthBills =
-            bills.filter {
-
-                it.timestamp >= startTime &&
-                        it.timestamp < endTime
-            }
+            getBillsForMonth(
+                bills,
+                currentYear,
+                currentMonth
+            )
 
         val incomeBills =
             monthBills.filter {
@@ -425,18 +500,20 @@ class StatisticsFragment : Fragment() {
         val balance =
             totalIncome - totalExpense
 
+        binding.tvBalance.text =
+            "¥${moneyFormat.format(balance)}"
+
         binding.tvTotalIncome.text =
             "¥${moneyFormat.format(totalIncome)}"
 
         binding.tvTotalExpense.text =
             "¥${moneyFormat.format(totalExpense)}"
 
-        binding.tvBalance.text =
-            "¥${moneyFormat.format(balance)}"
+        binding.tvCategoryTotal.text =
+            "¥${moneyFormat.format(totalExpense)}"
 
-        updateCategoryStatistics(
-            expenseBills,
-            categories
+        updateTrendChart(
+            bills
         )
 
         updatePieChart(
@@ -444,481 +521,589 @@ class StatisticsFragment : Fragment() {
             categories
         )
 
-        updateExpenseTrendChart(
-            expenseBills
+        updateCategoryStatistics(
+            expenseBills,
+            categories
         )
-        updateMonthlyTrendChart()
     }
-    
-    private fun updateMonthlyTrendChart() {
-
-    val bills =
-        repository.getBills()
-
-    val incomeEntries =
-        mutableListOf<Entry>()
-
-    val expenseEntries =
-        mutableListOf<Entry>()
-
-    val monthLabels =
-        mutableListOf<String>()
 
     /**
-     * 当前选择月份作为最后一个月，
-     * 向前统计6个月。
+     * 获取指定月份账单。
      */
-    for (index in 5 downTo 0) {
+    private fun getBillsForMonth(
+        bills: List<Bill>,
+        year: Int,
+        month: Int
+    ): List<Bill> {
 
-        val calendar =
-            Calendar.getInstance()
+        val start =
+            Calendar.getInstance().apply {
 
-        calendar.clear()
+                clear()
 
-        calendar.set(
-            currentYear,
-            currentMonth - 1,
-            1,
-            0,
-            0,
-            0
-        )
+                set(
+                    year,
+                    month - 1,
+                    1,
+                    0,
+                    0,
+                    0
+                )
 
-        calendar.set(
-            Calendar.MILLISECOND,
-            0
-        )
-
-        calendar.add(
-            Calendar.MONTH,
-            -index
-        )
-
-        val year =
-            calendar.get(
-                Calendar.YEAR
-            )
-
-        val month =
-            calendar.get(
-                Calendar.MONTH
-            ) + 1
-
-        val monthStart =
-            calendar.timeInMillis
-
-        val monthEndCalendar =
-            calendar.clone() as Calendar
-
-        monthEndCalendar.add(
-            Calendar.MONTH,
-            1
-        )
-
-        val monthEnd =
-            monthEndCalendar.timeInMillis
-
-        val monthBills =
-            bills.filter {
-
-                it.timestamp >= monthStart &&
-                        it.timestamp < monthEnd
+                set(
+                    Calendar.MILLISECOND,
+                    0
+                )
             }
 
-        val income =
-            monthBills
-                .filter {
-                    it.type ==
-                            BillType.INCOME
-                }
-                .sumOf {
-                    it.amount
-                }
+        val end =
+            Calendar.getInstance().apply {
 
-        val expense =
-            monthBills
-                .filter {
-                    it.type ==
-                            BillType.EXPENSE
-                }
-                .sumOf {
-                    it.amount
-                }
+                timeInMillis =
+                    start.timeInMillis
 
-        val x =
-            (5 - index).toFloat()
-
-        incomeEntries.add(
-            Entry(
-                x,
-                income.toFloat()
-            )
-        )
-
-        expenseEntries.add(
-            Entry(
-                x,
-                expense.toFloat()
-            )
-        )
-
-        monthLabels.add(
-            String.format(
-                Locale.getDefault(),
-                "%02d月",
-                month
-            )
-        )
-    }
-
-    /**
-     * 收入折线
-     */
-    val incomeDataSet =
-        LineDataSet(
-            incomeEntries,
-            "收入"
-        ).apply {
-
-            lineWidth = 2.5f
-
-            circleRadius = 4f
-
-            circleHoleRadius = 2f
-
-            setDrawValues(false)
-
-            setDrawCircles(true)
-
-            setDrawFilled(false)
-
-            mode =
-                LineDataSet.Mode.CUBIC_BEZIER
-
-            color =
-                Color.rgb(
-                    55,
-                    160,
-                    95
-                )
-
-            setCircleColor(
-                Color.rgb(
-                    55,
-                    160,
-                    95
-                )
-            )
-        }
-
-    /**
-     * 支出折线
-     */
-    val expenseDataSet =
-        LineDataSet(
-            expenseEntries,
-            "支出"
-        ).apply {
-
-            lineWidth = 2.5f
-
-            circleRadius = 4f
-
-            circleHoleRadius = 2f
-
-            setDrawValues(false)
-
-            setDrawCircles(true)
-
-            setDrawFilled(false)
-
-            mode =
-                LineDataSet.Mode.CUBIC_BEZIER
-
-            color =
-                Color.rgb(
-                    220,
-                    75,
-                    75
-                )
-
-            setCircleColor(
-                Color.rgb(
-                    220,
-                    75,
-                    75
-                )
-            )
-        }
-
-    val lineData =
-        LineData(
-            incomeDataSet,
-            expenseDataSet
-        )
-
-    /**
-     * X轴月份
-     */
-    monthlyTrendChart.xAxis.valueFormatter =
-        object : ValueFormatter() {
-
-            override fun getFormattedValue(
-                value: Float
-            ): String {
-
-                val index =
-                    value.toInt()
-
-                return if (
-                    index in monthLabels.indices
-                ) {
-                    monthLabels[index]
-                } else {
-                    ""
-                }
-            }
-        }
-
-    monthlyTrendChart.data =
-        lineData
-
-    /**
-     * Y轴最大值
-     */
-    val maxIncome =
-        incomeEntries.maxOfOrNull {
-            it.y
-        } ?: 0f
-
-    val maxExpense =
-        expenseEntries.maxOfOrNull {
-            it.y
-        } ?: 0f
-
-    val maxValue =
-        max(
-            maxIncome,
-            maxExpense
-        )
-
-    monthlyTrendChart.axisLeft.apply {
-
-        axisMinimum = 0f
-
-        axisMaximum =
-            if (maxValue <= 0f) {
-                10f
-            } else {
-                max(
-                    maxValue * 1.2f,
-                    10f
+                add(
+                    Calendar.MONTH,
+                    1
                 )
             }
+
+        return bills.filter {
+
+            it.timestamp >=
+                    start.timeInMillis &&
+                    it.timestamp <
+                    end.timeInMillis
+        }
     }
-
-    monthlyTrendChart.xAxis.apply {
-
-        axisMinimum = 0f
-
-        axisMaximum = 5f
-
-        labelCount = 6
-
-        granularity = 1f
-
-        setGranularityEnabled(true)
-    }
-
-    monthlyTrendChart.invalidate()
-
-    monthlyTrendChart.animateX(500)
-}
 
     /**
-     * 分类统计
+     * 收支趋势。
+     *
+     * 支出：
+     * 每天支出金额。
+     *
+     * 收入：
+     * 每天收入金额。
+     *
+     * 结余：
+     * 本月每天累计收入 - 累计支出。
      */
-    private fun updateCategoryStatistics(
-        expenseBills: List<Bill>,
-        categories: List<Category>
+    private fun updateTrendChart(
+        bills: List<Bill>
     ) {
 
-        binding.layoutCategoryStatistics
-            .removeAllViews()
+        val monthBills =
+            getBillsForMonth(
+                bills,
+                currentYear,
+                currentMonth
+            )
 
-        if (expenseBills.isEmpty()) {
+        val previousBills =
+            getBillsForMonth(
+                bills,
+                getPreviousYear(),
+                getPreviousMonth()
+            )
 
-            binding.tvCategoryEmpty.visibility =
-                View.VISIBLE
+        val monthCalendar =
+            Calendar.getInstance().apply {
 
-            return
-        }
+                clear()
 
-        binding.tvCategoryEmpty.visibility =
-            View.GONE
-
-        val categoryMap =
-            categories.associateBy {
-                it.id
+                set(
+                    currentYear,
+                    currentMonth - 1,
+                    1
+                )
             }
 
-        val grouped =
-            expenseBills
-                .groupBy {
-                    it.categoryId
-                }
-                .map { (categoryId, bills) ->
+        val daysInMonth =
+            monthCalendar.getActualMaximum(
+                Calendar.DAY_OF_MONTH
+            )
 
-                    val amount =
-                        bills.sumOf {
+        val dailyIncome =
+            mutableMapOf<Int, Double>()
+
+        val dailyExpense =
+            mutableMapOf<Int, Double>()
+
+        monthBills.forEach { bill ->
+
+            val calendar =
+                Calendar.getInstance()
+
+            calendar.timeInMillis =
+                bill.timestamp
+
+            val day =
+                calendar.get(
+                    Calendar.DAY_OF_MONTH
+                )
+
+            if (
+                bill.type ==
+                BillType.INCOME
+            ) {
+
+                dailyIncome[day] =
+                    (dailyIncome[day] ?: 0.0) +
+                            bill.amount
+
+            } else if (
+                bill.type ==
+                BillType.EXPENSE
+            ) {
+
+                dailyExpense[day] =
+                    (dailyExpense[day] ?: 0.0) +
+                            bill.amount
+            }
+        }
+
+        val entries =
+            mutableListOf<Entry>()
+
+        var cumulativeBalance =
+            0.0
+
+        for (day in 1..daysInMonth) {
+
+            val income =
+                dailyIncome[day] ?: 0.0
+
+            val expense =
+                dailyExpense[day] ?: 0.0
+
+            val value =
+                when (currentTrendType) {
+
+                    TrendType.EXPENSE ->
+                        expense
+
+                    TrendType.INCOME ->
+                        income
+
+                    TrendType.BALANCE -> {
+
+                        cumulativeBalance +=
+                            income - expense
+
+                        cumulativeBalance
+                    }
+                }
+
+            entries.add(
+                Entry(
+                    day.toFloat(),
+                    value.toFloat()
+                )
+            )
+        }
+
+        val dataSet =
+            LineDataSet(
+                entries,
+                ""
+            ).apply {
+
+                lineWidth = 2.8f
+
+                circleRadius = 3.5f
+
+                circleHoleRadius = 1.5f
+
+                setDrawValues(false)
+
+                setDrawCircles(
+                    daysInMonth <= 15
+                )
+
+                setDrawFilled(false)
+
+                mode =
+                    LineDataSet.Mode.CUBIC_BEZIER
+
+                color =
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.primary
+                    )
+
+                setCircleColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.primary
+                    )
+                )
+            }
+
+        trendChart.data =
+            LineData(dataSet)
+
+        trendChart.xAxis.apply {
+
+            axisMinimum = 1f
+
+            axisMaximum =
+                daysInMonth.toFloat()
+
+            labelCount =
+                when {
+                    daysInMonth <= 7 ->
+                        daysInMonth
+
+                    daysInMonth <= 15 ->
+                        6
+
+                    else ->
+                        5
+                }
+
+            granularity = 1f
+
+            valueFormatter =
+                object : ValueFormatter() {
+
+                    override fun getFormattedValue(
+                        value: Float
+                    ): String {
+
+                        val day =
+                            value.toInt()
+
+                        return if (
+                            day in 1..daysInMonth
+                        ) {
+                            "$day/${currentMonth}"
+                        } else {
+                            ""
+                        }
+                    }
+                }
+        }
+
+        val maxY =
+            entries.maxOfOrNull {
+                it.y
+            } ?: 0f
+
+        val minY =
+            entries.minOfOrNull {
+                it.y
+            } ?: 0f
+
+        trendChart.axisLeft.apply {
+
+            if (
+                currentTrendType ==
+                TrendType.BALANCE &&
+                minY < 0
+            ) {
+
+                axisMinimum =
+                    minY * 1.15f
+
+            } else {
+
+                axisMinimum =
+                    0f
+            }
+
+            axisMaximum =
+                if (
+                    maxY == minY
+                ) {
+
+                    if (maxY <= 0f) {
+                        10f
+                    } else {
+                        maxY * 1.2f
+                    }
+
+                } else {
+
+                    max(
+                        maxY * 1.2f,
+                        10f
+                    )
+                }
+        }
+
+        updateTrendSummary(
+            monthBills,
+            previousBills,
+            daysInMonth
+        )
+
+        trendChart.invalidate()
+        trendChart.animateX(400)
+    }
+
+    /**
+     * 更新趋势卡片顶部数据。
+     */
+    private fun updateTrendSummary(
+        monthBills: List<Bill>,
+        previousBills: List<Bill>,
+        daysInMonth: Int
+    ) {
+
+        val currentValue =
+            when (currentTrendType) {
+
+                TrendType.EXPENSE ->
+                    monthBills
+                        .filter {
+                            it.type ==
+                                    BillType.EXPENSE
+                        }
+                        .sumOf {
                             it.amount
                         }
 
-                    val categoryName =
-                        categoryMap[categoryId]
-                            ?.name
-                            ?: "其他"
+                TrendType.INCOME ->
+                    monthBills
+                        .filter {
+                            it.type ==
+                                    BillType.INCOME
+                        }
+                        .sumOf {
+                            it.amount
+                        }
 
-                    Triple(
-                        categoryName,
-                        amount,
-                        bills.size
-                    )
-                }
-                .sortedByDescending {
-                    it.second
-                }
+                TrendType.BALANCE -> {
 
-        val totalExpense =
-            expenseBills.sumOf {
-                it.amount
+                    val income =
+                        monthBills
+                            .filter {
+                                it.type ==
+                                        BillType.INCOME
+                            }
+                            .sumOf {
+                                it.amount
+                            }
+
+                    val expense =
+                        monthBills
+                            .filter {
+                                it.type ==
+                                        BillType.EXPENSE
+                            }
+                            .sumOf {
+                                it.amount
+                            }
+
+                    income - expense
+                }
             }
 
-        grouped.forEach { item ->
+        val previousValue =
+            when (currentTrendType) {
 
-            val percentage =
-                if (totalExpense > 0) {
+                TrendType.EXPENSE ->
+                    previousBills
+                        .filter {
+                            it.type ==
+                                    BillType.EXPENSE
+                        }
+                        .sumOf {
+                            it.amount
+                        }
 
-                    item.second /
-                            totalExpense *
-                            100
+                TrendType.INCOME ->
+                    previousBills
+                        .filter {
+                            it.type ==
+                                    BillType.INCOME
+                        }
+                        .sumOf {
+                            it.amount
+                        }
 
+                TrendType.BALANCE -> {
+
+                    val income =
+                        previousBills
+                            .filter {
+                                it.type ==
+                                        BillType.INCOME
+                            }
+                            .sumOf {
+                                it.amount
+                            }
+
+                    val expense =
+                        previousBills
+                            .filter {
+                                it.type ==
+                                        BillType.EXPENSE
+                            }
+                            .sumOf {
+                                it.amount
+                            }
+
+                    income - expense
+                }
+            }
+
+        val label =
+            when (currentTrendType) {
+
+                TrendType.EXPENSE ->
+                    "本月支出"
+
+                TrendType.INCOME ->
+                    "本月收入"
+
+                TrendType.BALANCE ->
+                    "本月结余"
+            }
+
+        binding.tvTrendLabel.text =
+            label
+
+        binding.tvTrendValue.text =
+            "¥${moneyFormat.format(currentValue)}"
+
+        val changeText =
+            calculateChangeText(
+                currentValue,
+                previousValue
+            )
+
+        binding.tvTrendChange.text =
+            changeText
+
+        if (
+            currentTrendType ==
+            TrendType.EXPENSE
+        ) {
+
+            val total =
+                monthBills
+                    .filter {
+                        it.type ==
+                                BillType.EXPENSE
+                    }
+                    .sumOf {
+                        it.amount
+                    }
+
+            val average =
+                if (daysInMonth > 0) {
+                    total / daysInMonth
                 } else {
                     0.0
                 }
 
-            addCategoryItem(
-                categoryName = item.first,
-                amount = item.second,
-                percentage = percentage,
-                count = item.third
-            )
+            val daily =
+                monthBills
+                    .filter {
+                        it.type ==
+                                BillType.EXPENSE
+                    }
+                    .groupBy { bill ->
+
+                        val calendar =
+                            Calendar.getInstance()
+
+                        calendar.timeInMillis =
+                            bill.timestamp
+
+                        calendar.get(
+                            Calendar.DAY_OF_MONTH
+                        )
+                    }
+                    .mapValues {
+                        it.value.sumOf(
+                            Bill::amount
+                        )
+                    }
+
+            val highest =
+                daily.maxByOrNull {
+                    it.value
+                }
+
+            binding.dailySummaryLayout
+                .visibility =
+                View.VISIBLE
+
+            binding.tvDailyAverage.text =
+                "¥${moneyFormat.format(average)}"
+
+            binding.tvHighestDaily.text =
+                "¥${moneyFormat.format(
+                    highest?.value ?: 0.0
+                )}"
+
+            binding.tvHighestDailyDate.text =
+                if (highest != null) {
+                    "${highest.key}日"
+                } else {
+                    "暂无"
+                }
+
+        } else {
+
+            binding.dailySummaryLayout
+                .visibility =
+                View.GONE
         }
     }
 
-    private fun addCategoryItem(
-        categoryName: String,
-        amount: Double,
-        percentage: Double,
-        count: Int
-    ) {
+    /**
+     * 上月变化。
+     */
+    private fun calculateChangeText(
+        current: Double,
+        previous: Double
+    ): String {
 
-        val context =
-            requireContext()
+        if (previous == 0.0) {
 
-        val row =
-            LinearLayout(context).apply {
-
-                orientation =
-                    LinearLayout.HORIZONTAL
-
-                gravity =
-                    android.view.Gravity.CENTER_VERTICAL
-
-                setPadding(
-                    0,
-                    12,
-                    0,
-                    12
-                )
+            return if (current == 0.0) {
+                "较上月 0%"
+            } else {
+                "较上月 新增"
             }
+        }
 
-        val nameView =
-            TextView(context).apply {
+        val percent =
+            (current - previous) /
+                    kotlin.math.abs(previous) *
+                    100.0
 
-                text =
-                    categoryName
+        return String.format(
+            Locale.getDefault(),
+            "较上月 %+.1f%%",
+            percent
+        )
+    }
 
-                textSize = 15f
+    private fun getPreviousYear(): Int {
 
-                setTextColor(
-                    resources.getColor(
-                        R.color.text_primary,
-                        null
-                    )
-                )
+        return if (currentMonth == 1) {
+            currentYear - 1
+        } else {
+            currentYear
+        }
+    }
 
-                layoutParams =
-                    LinearLayout.LayoutParams(
-                        0,
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        1f
-                    )
-            }
+    private fun getPreviousMonth(): Int {
 
-        val amountView =
-            TextView(context).apply {
-
-                text =
-                    "¥${moneyFormat.format(amount)}"
-
-                textSize = 15f
-
-                setTextColor(
-                    resources.getColor(
-                        R.color.text_primary,
-                        null
-                    )
-                )
-
-                gravity =
-                    android.view.Gravity.END
-            }
-
-        val detailView =
-            TextView(context).apply {
-
-                text =
-                    "  ${
-                        String.format(
-                            Locale.getDefault(),
-                            "%.1f",
-                            percentage
-                        )
-                    }% · ${count}笔"
-
-                textSize = 13f
-
-                setTextColor(
-                    resources.getColor(
-                        R.color.text_secondary,
-                        null
-                    )
-                )
-            }
-
-        row.addView(nameView)
-
-        row.addView(amountView)
-
-        row.addView(detailView)
-
-        binding.layoutCategoryStatistics
-            .addView(row)
+        return if (currentMonth == 1) {
+            12
+        } else {
+            currentMonth - 1
+        }
     }
 
     /**
-     * 支出分类饼图
+     * 更新圆环图。
      */
     private fun updatePieChart(
         expenseBills: List<Bill>,
@@ -954,12 +1139,12 @@ class StatisticsFragment : Fragment() {
                             it.amount
                         }
 
-                    val categoryName =
+                    val name =
                         categoryMap[categoryId]
                             ?.name
                             ?: "其他"
 
-                    categoryName to amount
+                    name to amount
                 }
                 .sortedByDescending {
                     it.second
@@ -974,6 +1159,11 @@ class StatisticsFragment : Fragment() {
                 )
             }
 
+        val colors =
+            createPieColors(
+                entries.size
+            )
+
         val dataSet =
             PieDataSet(
                 entries,
@@ -982,12 +1172,14 @@ class StatisticsFragment : Fragment() {
 
                 sliceSpace = 2f
 
-                selectionShift = 5f
+                selectionShift = 3f
 
-                valueTextSize = 11f
+                valueTextSize = 10f
 
                 valueTextColor =
                     Color.WHITE
+
+                setColors(colors)
             }
 
         val pieData =
@@ -1012,268 +1204,419 @@ class StatisticsFragment : Fragment() {
         pieChart.data =
             pieData
 
+        val total =
+            expenseBills.sumOf {
+                it.amount
+            }
+
         pieChart.centerText =
             "本月支出\n¥${
-                moneyFormat.format(
-                    expenseBills.sumOf {
-                        it.amount
-                    }
-                )
+                moneyFormat.format(total)
             }"
 
         pieChart.invalidate()
 
-        pieChart.animateY(500)
+        pieChart.animateY(450)
+    }
+
+    private fun createPieColors(
+        count: Int
+    ): List<Int> {
+
+        val baseColors =
+            listOf(
+                Color.rgb(79, 110, 247),
+                Color.rgb(105, 126, 244),
+                Color.rgb(87, 166, 255),
+                Color.rgb(94, 192, 144),
+                Color.rgb(244, 173, 78),
+                Color.rgb(235, 105, 119),
+                Color.rgb(153, 122, 214),
+                Color.rgb(120, 133, 151)
+            )
+
+        return List(count) { index ->
+            baseColors[
+                index % baseColors.size
+            ]
+        }
     }
 
     /**
-     * 每日支出趋势
+     * 分类列表。
+     *
+     * 按原型：
+     *
+     * 图标
+     * 分类名称
+     * 金额
+     * 百分比
+     * 进度条
      */
-    private fun updateExpenseTrendChart(
-        expenseBills: List<Bill>
+    private fun updateCategoryStatistics(
+        expenseBills: List<Bill>,
+        categories: List<Category>
     ) {
 
-        val calendar =
-            Calendar.getInstance()
+        binding.layoutCategoryStatistics
+            .removeAllViews()
 
-        calendar.clear()
-
-        calendar.set(
-            currentYear,
-            currentMonth - 1,
-            1,
-            0,
-            0,
-            0
-        )
-
-        calendar.set(
-            Calendar.MILLISECOND,
-            0
-        )
-
-        val daysInMonth =
-            calendar.getActualMaximum(
-                Calendar.DAY_OF_MONTH
-            )
-
-        /**
-         * 每日支出
-         *
-         * key = 日期
-         * value = 当天总支出
-         */
-        val dailyExpenses =
-            mutableMapOf<Int, Double>()
-
-        expenseBills.forEach { bill ->
-
-            val billCalendar =
-                Calendar.getInstance()
-
-            billCalendar.timeInMillis =
-                bill.timestamp
-
-            val day =
-                billCalendar.get(
-                    Calendar.DAY_OF_MONTH
-                )
-
-            dailyExpenses[day] =
-                (dailyExpenses[day] ?: 0.0) +
-                        bill.amount
-        }
-
-        /**
-         * 生成每天的数据点
-         */
-        val entries =
-            mutableListOf<Entry>()
-
-        for (day in 1..daysInMonth) {
-
-            val amount =
-                dailyExpenses[day] ?: 0.0
-
-            entries.add(
-                Entry(
-                    day.toFloat(),
-                    amount.toFloat()
-                )
-            )
-        }
-
-        /**
-         * 没有任何支出
-         */
         if (expenseBills.isEmpty()) {
 
-            expenseTrendChart.clear()
+            binding.tvCategoryEmpty.visibility =
+                View.VISIBLE
 
-            expenseTrendChart.setNoDataText(
-                "本月暂无支出"
-            )
-
-            expenseTrendChart.setNoDataTextColor(
-                resources.getColor(
-                    R.color.text_secondary,
-                    null
-                )
-            )
-
-            expenseTrendChart.invalidate()
-
-            binding.tvDailyAverage.text =
-                "¥0.00"
-
-            binding.tvHighestDaily.text =
-                "¥0.00"
-
-            binding.tvHighestDailyDate.text =
-                "暂无"
+            pieChart.visibility =
+                View.GONE
 
             return
         }
 
-        /**
-         * 找出最高单日
-         */
-        val highestDay =
-            dailyExpenses.maxByOrNull {
-                it.value
+        binding.tvCategoryEmpty.visibility =
+            View.GONE
+
+        pieChart.visibility =
+            View.VISIBLE
+
+        val categoryMap =
+            categories.associateBy {
+                it.id
             }
 
-        val highestAmount =
-            highestDay?.value ?: 0.0
-
-        val highestDate =
-            highestDay?.key ?: 0
-
-        /**
-         * 计算日均支出
-         *
-         * 按当月自然日计算。
-         *
-         * 例如：
-         * 9月有30天
-         * 本月支出320.14
-         * 日均 = 320.14 / 30
-         */
         val totalExpense =
             expenseBills.sumOf {
                 it.amount
             }
 
-        val dailyAverage =
-            if (daysInMonth > 0) {
-                totalExpense /
-                        daysInMonth
-            } else {
-                0.0
+        val grouped =
+            expenseBills
+                .groupBy {
+                    it.categoryId
+                }
+                .map { (categoryId, bills) ->
+
+                    val category =
+                        categoryMap[categoryId]
+
+                    val amount =
+                        bills.sumOf {
+                            it.amount
+                        }
+
+                    CategoryStatistic(
+                        categoryId = categoryId,
+                        name =
+                            category?.name
+                                ?: "其他",
+                        amount = amount,
+                        count = bills.size
+                    )
+                }
+                .sortedByDescending {
+                    it.amount
+                }
+
+        grouped.forEach { item ->
+
+            val percentage =
+                if (totalExpense > 0) {
+                    item.amount /
+                            totalExpense *
+                            100.0
+                } else {
+                    0.0
+                }
+
+            addCategoryItem(
+                item,
+                percentage
+            )
+        }
+    }
+
+    private data class CategoryStatistic(
+        val categoryId: String,
+        val name: String,
+        val amount: Double,
+        val count: Int
+    )
+
+    /**
+     * 添加单个分类。
+     */
+    private fun addCategoryItem(
+        item: CategoryStatistic,
+        percentage: Double
+    ) {
+
+        val context =
+            requireContext()
+
+        val container =
+            LinearLayout(context).apply {
+
+                orientation =
+                    LinearLayout.VERTICAL
+
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        topMargin =
+                            dp(17)
+                    }
             }
 
-        binding.tvDailyAverage.text =
-            "¥${moneyFormat.format(dailyAverage)}"
+        val row =
+            LinearLayout(context).apply {
 
-        binding.tvHighestDaily.text =
-            "¥${moneyFormat.format(highestAmount)}"
+                orientation =
+                    LinearLayout.HORIZONTAL
 
-        binding.tvHighestDailyDate.text =
-            "${highestDate}日"
+                gravity =
+                    Gravity.CENTER_VERTICAL
+            }
 
-        /**
-         * 创建折线
-         */
-        val dataSet =
-            LineDataSet(
-                entries,
-                "每日支出"
-            ).apply {
+        val icon =
+            ImageView(context).apply {
 
-                lineWidth = 2.5f
-
-                circleRadius = 4f
-
-                circleHoleRadius = 2f
-
-                setDrawValues(false)
-
-                setDrawCircles(true)
-
-                setDrawFilled(false)
-
-                mode =
-                    LineDataSet.Mode.CUBIC_BEZIER
-
-                color =
-                    Color.rgb(
-                        55,
-                        115,
-                        255
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        dp(40),
+                        dp(40)
                     )
 
-                setCircleColor(
+                setPadding(
+                    dp(9),
+                    dp(9),
+                    dp(9),
+                    dp(9)
+                )
+
+                background =
+                    ContextCompat.getDrawable(
+                        context,
+                        R.drawable.bg_bill_icon
+                    )
+
+                setImageResource(
+                    getCategoryIcon(
+                        item.name
+                    )
+                )
+
+                contentDescription =
+                    item.name
+            }
+
+        row.addView(icon)
+
+        val info =
+            LinearLayout(context).apply {
+
+                orientation =
+                    LinearLayout.VERTICAL
+
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1f
+                    ).apply {
+                        marginStart =
+                            dp(11)
+                    }
+            }
+
+        val name =
+            TextView(context).apply {
+
+                text =
+                    item.name
+
+                textSize = 13f
+
+                setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.text_primary
+                    )
+                )
+
+                setTypeface(
+                    null,
+                    android.graphics.Typeface.BOLD
+                )
+            }
+
+        val amount =
+            TextView(context).apply {
+
+                text =
+                    "¥${moneyFormat.format(item.amount)}"
+
+                textSize = 11f
+
+                setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.text_secondary
+                    )
+
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply {
+                        topMargin =
+                            dp(3)
+                    }
+            }
+
+        info.addView(name)
+        info.addView(amount)
+
+        row.addView(info)
+
+        val percent =
+            TextView(context).apply {
+
+                text =
+                    String.format(
+                        Locale.getDefault(),
+                        "%.1f%%",
+                        percentage
+                    )
+
+                textSize = 13f
+
+                setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.text_primary
+                    )
+                )
+
+                setTypeface(
+                    null,
+                    android.graphics.Typeface.BOLD
+                )
+            }
+
+        row.addView(percent)
+
+        container.addView(row)
+
+        val progressBackground =
+            LinearLayout(context).apply {
+
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        dp(5)
+                    ).apply {
+                        topMargin =
+                            dp(8)
+                    }
+
+                setBackgroundColor(
                     Color.rgb(
-                        55,
-                        115,
-                        255
+                        240,
+                        241,
+                        245
                     )
                 )
             }
 
-        val lineData =
-            LineData(dataSet)
+        val progress =
+            View(context).apply {
 
-        expenseTrendChart.data =
-            lineData
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        0,
+                        dp(5)
+                    ).apply {
 
-        /**
-         * 根据最高支出自动设置 Y 轴范围
-         */
-        val maxValue =
-            entries.maxOfOrNull {
-                it.y
-            } ?: 0f
+                        weight =
+                            percentage
+                                .toFloat()
+                                .coerceAtLeast(0f)
+                                .coerceAtMost(100f)
+                    }
 
-        expenseTrendChart.axisLeft.apply {
-
-            axisMinimum = 0f
-
-            axisMaximum =
-                if (maxValue <= 0f) {
-                    10f
-                } else {
-                    max(
-                        maxValue * 1.2f,
-                        10f
+                setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.primary
                     )
-                }
+                )
+            }
+
+        progressBackground.addView(
+            progress
+        )
+
+        container.addView(
+            progressBackground
+        )
+
+        binding.layoutCategoryStatistics
+            .addView(container)
+    }
+
+    /**
+     * 根据现有分类资源匹配图标。
+     *
+     * 不新增图片资源。
+     */
+    private fun getCategoryIcon(
+        name: String
+    ): Int {
+
+        return when {
+
+            name.contains("餐") ||
+                    name.contains("吃") ||
+                    name.contains("饭") ||
+                    name.contains("食品") ->
+                R.drawable.ic_category_food
+
+            name.contains("交通") ||
+                    name.contains("公交") ||
+                    name.contains("地铁") ||
+                    name.contains("打车") ||
+                    name.contains("出行") ->
+                R.drawable.ic_category_transport
+
+            name.contains("购物") ||
+                    name.contains("服饰") ||
+                    name.contains("日用") ->
+                R.drawable.ic_category_shopping
+
+            name.contains("通信") ||
+                    name.contains("通讯") ||
+                    name.contains("手机") ->
+                R.drawable.ic_category_communication
+
+            name.contains("旅游") ||
+                    name.contains("旅行") ->
+                R.drawable.ic_category_travel
+
+            else ->
+                R.drawable.ic_category_chart
         }
+    }
 
-        /**
-         * X轴显示优化
-         */
-        expenseTrendChart.xAxis.apply {
+    /**
+     * dp 转 px。
+     */
+    private fun dp(value: Int): Int {
 
-            axisMinimum = 1f
-
-            axisMaximum =
-                daysInMonth.toFloat()
-
-            labelCount =
-                if (daysInMonth <= 7) {
-                    daysInMonth
-                } else {
-                    7
-                }
-
-            granularity = 1f
-
-            setGranularityEnabled(true)
-        }
-
-        expenseTrendChart.invalidate()
-
-        expenseTrendChart.animateX(500)
+        return (
+            value *
+                    resources.displayMetrics.density +
+                    0.5f
+            ).toInt()
     }
 }
