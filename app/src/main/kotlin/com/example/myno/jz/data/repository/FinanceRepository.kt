@@ -23,7 +23,6 @@ class FinanceRepository(
     // --------------------------------------------------
 
     fun getBills(): List<Bill> {
-
         return dataStore
             .getBills()
             .sortedByDescending {
@@ -60,50 +59,31 @@ class FinanceRepository(
         val bill =
             Bill(
                 id = UUID.randomUUID().toString(),
-
                 type = type,
-
                 amount = amount,
-
                 categoryId = categoryId,
-
                 accountId = accountId,
-
                 note = note,
-
                 timestamp = timestamp,
-
                 createdAt = now,
-
                 updatedAt = now,
-
                 source = source,
-
-                sourceTransactionId =
-                    sourceTransactionId
+                sourceTransactionId = sourceTransactionId
             )
 
-        return dataStore.addBill(
-            bill
-        )
+        return dataStore.addBill(bill)
     }
 
     fun updateBill(
         bill: Bill
     ): Boolean {
-
-        return dataStore.updateBill(
-            bill
-        )
+        return dataStore.updateBill(bill)
     }
 
     fun deleteBill(
         billId: String
     ): Boolean {
-
-        return dataStore.deleteBill(
-            billId
-        )
+        return dataStore.deleteBill(billId)
     }
 
     // --------------------------------------------------
@@ -111,7 +91,6 @@ class FinanceRepository(
     // --------------------------------------------------
 
     fun getAccounts(): List<Account> {
-
         return dataStore
             .getAccounts()
             .sortedBy {
@@ -122,28 +101,19 @@ class FinanceRepository(
     fun addAccount(
         account: Account
     ): Boolean {
-
-        return dataStore.addAccount(
-            account
-        )
+        return dataStore.addAccount(account)
     }
 
     fun updateAccount(
         account: Account
     ): Boolean {
-
-        return dataStore.updateAccount(
-            account
-        )
+        return dataStore.updateAccount(account)
     }
 
     fun deleteAccount(
         accountId: String
     ): Boolean {
-
-        return dataStore.deleteAccount(
-            accountId
-        )
+        return dataStore.deleteAccount(accountId)
     }
 
     // --------------------------------------------------
@@ -151,7 +121,6 @@ class FinanceRepository(
     // --------------------------------------------------
 
     fun getCategories(): List<Category> {
-
         return dataStore
             .getCategories()
             .sortedBy {
@@ -162,56 +131,52 @@ class FinanceRepository(
     fun addCategory(
         category: Category
     ): Boolean {
-
-        return dataStore.addCategory(
-            category
-        )
+        return dataStore.addCategory(category)
     }
 
     fun updateCategory(
         category: Category
     ): Boolean {
-
-        return dataStore.updateCategory(
-            category
-        )
+        return dataStore.updateCategory(category)
     }
 
     fun deleteCategory(
         categoryId: String
     ): Boolean {
-
-        return dataStore.deleteCategory(
-            categoryId
-        )
+        return dataStore.deleteCategory(categoryId)
     }
 
- // Budget
+    // --------------------------------------------------
+    // Budget
+    // --------------------------------------------------
 
-fun getBudgets(): List<Budget> =
-    dataStore.getBudgets()
+    fun getBudgets(): List<Budget> {
+        return dataStore.getBudgets()
+    }
 
-fun addBudget(
-    budget: Budget
-): Boolean =
-    dataStore.addBudget(budget)
+    fun addBudget(
+        budget: Budget
+    ): Boolean {
+        return dataStore.addBudget(budget)
+    }
 
-fun updateBudget(
-    budget: Budget
-): Boolean =
-    dataStore.updateBudget(budget)
+    fun updateBudget(
+        budget: Budget
+    ): Boolean {
+        return dataStore.updateBudget(budget)
+    }
 
-fun deleteBudget(
-    budgetId: String
-): Boolean =
-    dataStore.deleteBudget(budgetId)
+    fun deleteBudget(
+        budgetId: String
+    ): Boolean {
+        return dataStore.deleteBudget(budgetId)
+    }
 
     // --------------------------------------------------
     // Transfer
     // --------------------------------------------------
 
     fun getTransfers(): List<Transfer> {
-
         return dataStore
             .getTransfers()
             .sortedByDescending {
@@ -222,32 +187,33 @@ fun deleteBudget(
     fun addTransfer(
         transfer: Transfer
     ): Boolean {
-
-        return dataStore.addTransfer(
-            transfer
-        )
+        return dataStore.addTransfer(transfer)
     }
-    fun updateTransfer(transfer: Transfer): Boolean =
-    dataStore.updateTransfer(transfer)
-    fun deleteTransfer(transferId: String): Boolean =
-    dataStore.deleteTransfer(transferId)
+
+    fun updateTransfer(
+        transfer: Transfer
+    ): Boolean {
+        return dataStore.updateTransfer(transfer)
+    }
+
+    fun deleteTransfer(
+        transferId: String
+    ): Boolean {
+        return dataStore.deleteTransfer(transferId)
+    }
 
     // --------------------------------------------------
     // Settings
     // --------------------------------------------------
 
     fun getSettings(): AppSettings {
-
         return dataStore.getSettings()
     }
 
     fun saveSettings(
         settings: AppSettings
     ): Boolean {
-
-        return dataStore.saveSettings(
-            settings
-        )
+        return dataStore.saveSettings(settings)
     }
 
     // --------------------------------------------------
@@ -255,7 +221,6 @@ fun deleteBudget(
     // --------------------------------------------------
 
     fun clearAllData(): Boolean {
-
         return dataStore.clearAllData()
     }
 }

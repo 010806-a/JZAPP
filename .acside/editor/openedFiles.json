@@ -14,7 +14,37 @@
           "line": 540
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/data/repository/FinanceRepository.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 5214,
+          "line": 225
+        },
+        "start": {
+          "column": 1,
+          "index": 5214,
+          "line": 225
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/命令.md",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/data/local/JsonDataStore.kt"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/命令.md"
 }
