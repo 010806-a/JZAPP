@@ -908,6 +908,498 @@ return
         trendChart.invalidate()
         trendChart.animateX(400)
     }
+    
+    private fun updateDailyTrendChart(
+    bills: List<Bill>
+) {
+
+    val monthBills =
+        getBillsForMonth(
+            bills,
+            currentYear,
+            currentMonth
+        )
+
+    val previousBills =
+        getBillsForMonth(
+            bills,
+            getPreviousYear(),
+            getPreviousMonth()
+        )
+
+    val calendar =
+        Calendar.getInstance().apply {
+            clear()
+            set(
+                currentYear,
+                currentMonth - 1,
+                1
+            )
+        }
+
+    val daysInMonth =
+        calendar.getActualMaximum(
+            Calendar.DAY_OF_MONTH
+        )
+
+    val dailyIncome =
+        mutableMapOf<Int, Double>()
+
+    val dailyExpense =
+        mutableMapOf<Int, Double>()
+
+    monthBills.forEach { bill ->
+
+        val billCalendar =
+            Calendar.getInstance()
+
+        billCalendar.timeInMillis =
+            bill.timestamp
+
+        val day =
+            billCalendar.get(
+                Calendar.DAY_OF_MONTH
+            )
+
+        when (bill.type) {
+
+            BillType.INCOME -> {
+                dailyIncome[day] =
+                    (dailyIncome[day] ?: 0.0) +
+                            bill.amount
+            }
+
+            BillType.EXPENSE -> {
+                dailyExpense[day] =
+                    (dailyExpense[day] ?: 0.0) +
+                            bill.amount
+            }
+        }
+    }
+
+    val entries =
+        mutableListOf<Entry>()
+
+    var cumulativeBalance =
+        0.0
+
+    for (day in 1..daysInMonth) {
+
+        val income =
+            dailyIncome[day] ?: 0.0
+
+        val expense =
+            dailyExpense[day] ?: 0.0
+
+        val value =
+            when (currentTrendType) {
+
+                TrendType.EXPENSE ->
+                    expense
+
+                TrendType.INCOME ->
+                    income
+
+                TrendType.BALANCE -> {
+                    cumulativeBalance +=
+                        income - expense
+
+                    cumulativeBalance
+                }
+            }
+
+        entries.add(
+            Entry(
+                day.toFloat(),
+                value.toFloat()
+            )
+        )
+    }
+
+    applyTrendData(
+        entries = entries,
+        labels = { value ->
+
+            val day =
+                value.toInt()
+
+            if (day in 1..daysInMonth) {
+                "$day/$currentMonth"
+            } else {
+                ""
+            }
+        }
+    )
+
+    updateTrendSummary(
+        monthBills,
+        previousBills,
+        daysInMonth
+    )
+}
+    private fun updateMonthlyTrendChart(
+    bills: List<Bill>
+) {
+
+    val entries =
+        mutableListOf<Entry>()
+
+    for (month in 1..12) {
+
+        val monthBills =
+            getBillsForMonth(
+                bills,
+                currentYear,
+                month
+            )
+
+        val income =
+            monthBills
+                .filter {
+                    it.type == BillType.INCOME
+                }
+                .sumOf {
+                    it.amount
+                }
+
+        val expense =
+            monthBills
+                .filter {
+                    it.type == BillType.EXPENSE
+                }
+                .sumOf {
+                    it.amount
+                }
+
+        val value =
+            when (currentTrendType) {
+
+                TrendType.EXPENSE ->
+                    expense
+
+                TrendType.INCOME ->
+                    income
+
+                TrendType.BALANCE ->
+                    income - expense
+            }
+
+        entries.add(
+            Entry(
+                month.toFloat(),
+                value.toFloat()
+            )
+        )
+    }
+
+    applyTrendData(
+        entries = entries,
+        labels = { value ->
+
+            val month =
+                value.toInt()
+
+            if (month in 1..12) {
+                "${month}月"
+            } else {
+                ""
+            }
+        }
+    )
+
+    val yearBills =
+        bills.filter {
+
+            val calendar =
+                Calendar.getInstance()
+
+            calendar.timeInMillis =
+                it.timestamp
+
+            calendar.get(
+                Calendar.YEAR
+            ) == currentYear
+        }
+
+    val previousYearBills =
+        bills.filter {
+
+            val calendar =
+                Calendar.getInstance()
+
+            calendar.timeInMillis =
+                it.timestamp
+
+            calendar.get(
+                Calendar.YEAR
+            ) == currentYear - 1
+        }
+
+    updateTrendSummary(
+        yearBills,
+        previousYearBills,
+        12
+    )
+}
+
+    private fun updateYearlyTrendChart(
+    bills: List<Bill>
+) {
+
+    val currentCalendar =
+        Calendar.getInstance()
+
+    val currentYear =
+        currentCalendar.get(
+            Calendar.YEAR
+        )
+
+    val entries =
+        mutableListOf<Entry>()
+
+    val startYear =
+        currentYear - 4
+
+    for (year in startYear..currentYear) {
+
+        val yearBills =
+            bills.filter {
+
+                val calendar =
+                    Calendar.getInstance()
+
+                calendar.timeInMillis =
+                    it.timestamp
+
+                calendar.get(
+                    Calendar.YEAR
+                ) == year
+            }
+
+        val income =
+            yearBills
+                .filter {
+                    it.type == BillType.INCOME
+                }
+                .sumOf {
+                    it.amount
+                }
+
+        val expense =
+            yearBills
+                .filter {
+                    it.type == BillType.EXPENSE
+                }
+                .sumOf {
+                    it.amount
+                }
+
+        val value =
+            when (currentTrendType) {
+
+                TrendType.EXPENSE ->
+                    expense
+
+                TrendType.INCOME ->
+                    income
+
+                TrendType.BALANCE ->
+                    income - expense
+            }
+
+        entries.add(
+            Entry(
+                year.toFloat(),
+                value.toFloat()
+            )
+        )
+    }
+
+    applyTrendData(
+        entries = entries,
+        labels = { value ->
+
+            val year =
+                value.toInt()
+
+            if (
+                year in startYear..currentYear
+            ) {
+                "${year}年"
+            } else {
+                ""
+            }
+        }
+    )
+
+    val currentYearBills =
+        bills.filter {
+
+            val calendar =
+                Calendar.getInstance()
+
+            calendar.timeInMillis =
+                it.timestamp
+
+            calendar.get(
+                Calendar.YEAR
+            ) == currentYear
+        }
+
+    val previousYearBills =
+        bills.filter {
+
+            val calendar =
+                Calendar.getInstance()
+
+            calendar.timeInMillis =
+                it.timestamp
+
+            calendar.get(
+                Calendar.YEAR
+            ) == currentYear - 1
+        }
+
+    updateTrendSummary(
+        currentYearBills,
+        previousYearBills,
+        365
+    )
+}    
+
+
+   private fun applyTrendData(
+    entries: List<Entry>,
+    labels: (Float) -> String
+) {
+
+    val dataSet =
+        LineDataSet(
+            entries,
+            ""
+        ).apply {
+
+            lineWidth = 2.8f
+
+            circleRadius = 3.5f
+
+            circleHoleRadius = 1.5f
+
+            setDrawValues(false)
+
+            setDrawCircles(
+                entries.size <= 15
+            )
+
+            setDrawFilled(false)
+
+            mode =
+                LineDataSet.Mode.CUBIC_BEZIER
+
+            color =
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.primary
+                )
+
+            setCircleColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.primary
+                )
+            )
+        }
+
+    trendChart.data =
+        LineData(dataSet)
+
+    val minX =
+        entries.minOfOrNull {
+            it.x
+        } ?: 1f
+
+    val maxX =
+        entries.maxOfOrNull {
+            it.x
+        } ?: 1f
+
+    trendChart.xAxis.apply {
+
+        axisMinimum = minX
+
+        axisMaximum = maxX
+
+        labelCount =
+            when (currentTrendPeriod) {
+
+                TrendPeriod.DAY -> 5
+
+                TrendPeriod.MONTH -> 6
+
+                TrendPeriod.YEAR -> 5
+            }
+
+        granularity = 1f
+
+        setGranularityEnabled(true)
+
+        valueFormatter =
+            object : ValueFormatter() {
+
+                override fun getFormattedValue(
+                    value: Float
+                ): String {
+                    return labels(value)
+                }
+            }
+    }
+
+    val maxY =
+        entries.maxOfOrNull {
+            it.y
+        } ?: 0f
+
+    val minY =
+        entries.minOfOrNull {
+            it.y
+        } ?: 0f
+
+    trendChart.axisLeft.apply {
+
+        axisMinimum =
+            if (
+                currentTrendType ==
+                TrendType.BALANCE &&
+                minY < 0
+            ) {
+                minY * 1.15f
+            } else {
+                0f
+            }
+
+        axisMaximum =
+            if (maxY == minY) {
+
+                if (maxY <= 0f) {
+                    10f
+                } else {
+                    maxY * 1.2f
+                }
+
+            } else {
+
+                max(
+                    maxY * 1.2f,
+                    10f
+                )
+            }
+    }
+
+    trendChart.invalidate()
+
+    trendChart.animateX(400)
+}
+    
 
     /**
      * 更新趋势卡片顶部数据。
