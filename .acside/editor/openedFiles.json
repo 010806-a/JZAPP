@@ -1,110 +1,20 @@
 {
   "allFiles": [
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/assets/AssetsFragment.kt",
+      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/data/local/JsonDataStore.kt",
       "selection": {
         "end": {
           "column": 1,
-          "index": 10467,
-          "line": 458
+          "index": 11012,
+          "line": 540
         },
         "start": {
           "column": 1,
-          "index": 10467,
-          "line": 458
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/PasswordSetupHelper.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 1367,
-          "line": 61
-        },
-        "start": {
-          "column": 1,
-          "index": 1367,
-          "line": 61
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/PatternSetupHelper.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 1805,
-          "line": 88
-        },
-        "start": {
-          "column": 1,
-          "index": 1805,
-          "line": 88
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ChangePasswordFragment.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 1833,
-          "line": 76
-        },
-        "start": {
-          "column": 1,
-          "index": 1833,
-          "line": 76
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPasswordFragment.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 1831,
-          "line": 76
-        },
-        "start": {
-          "column": 1,
-          "index": 1831,
-          "line": 76
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ChangePatternFragment.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 2261,
-          "line": 86
-        },
-        "start": {
-          "column": 1,
-          "index": 2261,
-          "line": 86
-        }
-      }
-    },
-    {
-      "file": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPatternFragment.kt",
-      "selection": {
-        "end": {
-          "column": 1,
-          "index": 2257,
-          "line": 86
-        },
-        "start": {
-          "column": 1,
-          "index": 2257,
-          "line": 86
+          "index": 11012,
+          "line": 540
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/ui/privacy/ResetPatternFragment.kt"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/JZ/app/src/main/kotlin/com/example/myno/jz/data/local/JsonDataStore.kt"
 }

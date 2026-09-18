@@ -34,6 +34,9 @@ class JsonDataStore(context: Context) {
         return File(appContext.filesDir, fileName)
     }
 
+    /**
+     * 通用列表读取
+     */
     private fun <T> readList(
         fileName: String,
         typeToken: TypeToken<List<T>>
@@ -66,6 +69,9 @@ class JsonDataStore(context: Context) {
         }
     }
 
+    /**
+     * 通用列表写入
+     */
     private fun <T> writeList(
         fileName: String,
         data: List<T>
@@ -83,7 +89,6 @@ class JsonDataStore(context: Context) {
                 Charsets.UTF_8
             )
 
-            // 写完以后再次确认文件存在且不为空
             file.exists() &&
                     file.length() > 0L
 
@@ -93,6 +98,75 @@ class JsonDataStore(context: Context) {
 
             false
         }
+    }
+
+    /**
+     * 通用新增
+     */
+    private fun <T> addItem(
+        currentItems: List<T>,
+        item: T,
+        save: (List<T>) -> Boolean
+    ): Boolean {
+
+        val items =
+            currentItems.toMutableList()
+
+        items.add(item)
+
+        return save(items)
+    }
+
+    /**
+     * 通用更新
+     */
+    private fun <T> updateItem(
+        currentItems: List<T>,
+        item: T,
+        idOf: (T) -> String,
+        save: (List<T>) -> Boolean
+    ): Boolean {
+
+        val items =
+            currentItems.toMutableList()
+
+        val index =
+            items.indexOfFirst {
+                idOf(it) == idOf(item)
+            }
+
+        if (index == -1) {
+            return false
+        }
+
+        items[index] = item
+
+        return save(items)
+    }
+
+    /**
+     * 通用删除
+     */
+    private fun <T> deleteItem(
+        currentItems: List<T>,
+        id: String,
+        idOf: (T) -> String,
+        save: (List<T>) -> Boolean
+    ): Boolean {
+
+        val items =
+            currentItems.toMutableList()
+
+        val removed =
+            items.removeAll {
+                idOf(it) == id
+            }
+
+        if (!removed) {
+            return false
+        }
+
+        return save(items)
     }
 
     // --------------------------------------------------
@@ -121,52 +195,35 @@ class JsonDataStore(context: Context) {
         bill: Bill
     ): Boolean {
 
-        val bills =
-            getBills().toMutableList()
-
-        bills.add(bill)
-
-        return saveBills(bills)
+        return addItem(
+            currentItems = getBills(),
+            item = bill,
+            save = ::saveBills
+        )
     }
 
     fun updateBill(
         bill: Bill
     ): Boolean {
 
-        val bills =
-            getBills().toMutableList()
-
-        val index =
-            bills.indexOfFirst {
-                it.id == bill.id
-            }
-
-        if (index == -1) {
-            return false
-        }
-
-        bills[index] = bill
-
-        return saveBills(bills)
+        return updateItem(
+            currentItems = getBills(),
+            item = bill,
+            idOf = { it.id },
+            save = ::saveBills
+        )
     }
 
     fun deleteBill(
         billId: String
     ): Boolean {
 
-        val bills =
-            getBills().toMutableList()
-
-        val removed =
-            bills.removeAll {
-                it.id == billId
-            }
-
-        if (!removed) {
-            return false
-        }
-
-        return saveBills(bills)
+        return deleteItem(
+            currentItems = getBills(),
+            id = billId,
+            idOf = { it.id },
+            save = ::saveBills
+        )
     }
 
     // --------------------------------------------------
@@ -195,52 +252,35 @@ class JsonDataStore(context: Context) {
         account: Account
     ): Boolean {
 
-        val accounts =
-            getAccounts().toMutableList()
-
-        accounts.add(account)
-
-        return saveAccounts(accounts)
+        return addItem(
+            currentItems = getAccounts(),
+            item = account,
+            save = ::saveAccounts
+        )
     }
 
     fun updateAccount(
         account: Account
     ): Boolean {
 
-        val accounts =
-            getAccounts().toMutableList()
-
-        val index =
-            accounts.indexOfFirst {
-                it.id == account.id
-            }
-
-        if (index == -1) {
-            return false
-        }
-
-        accounts[index] = account
-
-        return saveAccounts(accounts)
+        return updateItem(
+            currentItems = getAccounts(),
+            item = account,
+            idOf = { it.id },
+            save = ::saveAccounts
+        )
     }
 
     fun deleteAccount(
         accountId: String
     ): Boolean {
 
-        val accounts =
-            getAccounts().toMutableList()
-
-        val removed =
-            accounts.removeAll {
-                it.id == accountId
-            }
-
-        if (!removed) {
-            return false
-        }
-
-        return saveAccounts(accounts)
+        return deleteItem(
+            currentItems = getAccounts(),
+            id = accountId,
+            idOf = { it.id },
+            save = ::saveAccounts
+        )
     }
 
     // --------------------------------------------------
@@ -269,127 +309,94 @@ class JsonDataStore(context: Context) {
         category: Category
     ): Boolean {
 
-        val categories =
-            getCategories().toMutableList()
-
-        categories.add(category)
-
-        return saveCategories(categories)
+        return addItem(
+            currentItems = getCategories(),
+            item = category,
+            save = ::saveCategories
+        )
     }
 
     fun updateCategory(
         category: Category
     ): Boolean {
 
-        val categories =
-            getCategories().toMutableList()
-
-        val index =
-            categories.indexOfFirst {
-                it.id == category.id
-            }
-
-        if (index == -1) {
-            return false
-        }
-
-        categories[index] = category
-
-        return saveCategories(categories)
+        return updateItem(
+            currentItems = getCategories(),
+            item = category,
+            idOf = { it.id },
+            save = ::saveCategories
+        )
     }
 
     fun deleteCategory(
         categoryId: String
     ): Boolean {
 
-        val categories =
-            getCategories().toMutableList()
-
-        val removed =
-            categories.removeAll {
-                it.id == categoryId
-            }
-
-        if (!removed) {
-            return false
-        }
-
-        return saveCategories(categories)
+        return deleteItem(
+            currentItems = getCategories(),
+            id = categoryId,
+            idOf = { it.id },
+            save = ::saveCategories
+        )
     }
 
-  // --------------------------------------------------
-// Budget
-// --------------------------------------------------
+    // --------------------------------------------------
+    // Budget
+    // --------------------------------------------------
 
-fun getBudgets(): List<Budget> {
+    fun getBudgets(): List<Budget> {
 
-    return readList(
-        BUDGETS_FILE,
-        object : TypeToken<List<Budget>>() {}
-    )
-}
-
-fun saveBudgets(
-    budgets: List<Budget>
-): Boolean {
-
-    return writeList(
-        BUDGETS_FILE,
-        budgets
-    )
-}
-
-fun addBudget(
-    budget: Budget
-): Boolean {
-
-    val budgets =
-        getBudgets().toMutableList()
-
-    budgets.add(budget)
-
-    return saveBudgets(budgets)
-}
-
-fun updateBudget(
-    budget: Budget
-): Boolean {
-
-    val budgets =
-        getBudgets().toMutableList()
-
-    val index =
-        budgets.indexOfFirst {
-            it.id == budget.id
-        }
-
-    if (index == -1) {
-        return false
+        return readList(
+            BUDGETS_FILE,
+            object : TypeToken<List<Budget>>() {}
+        )
     }
 
-    budgets[index] = budget
+    fun saveBudgets(
+        budgets: List<Budget>
+    ): Boolean {
 
-    return saveBudgets(budgets)
-}
-
-fun deleteBudget(
-    budgetId: String
-): Boolean {
-
-    val budgets =
-        getBudgets().toMutableList()
-
-    val removed =
-        budgets.removeAll {
-            it.id == budgetId
-        }
-
-    if (!removed) {
-        return false
+        return writeList(
+            BUDGETS_FILE,
+            budgets
+        )
     }
 
-    return saveBudgets(budgets)
-}
+    fun addBudget(
+        budget: Budget
+    ): Boolean {
+
+        return addItem(
+            currentItems = getBudgets(),
+            item = budget,
+            save = ::saveBudgets
+        )
+    }
+
+    fun updateBudget(
+        budget: Budget
+    ): Boolean {
+
+        return updateItem(
+            currentItems = getBudgets(),
+            item = budget,
+            idOf = { it.id },
+            save = ::saveBudgets
+        )
+    }
+
+    fun deleteBudget(
+        budgetId: String
+    ): Boolean {
+
+        return deleteItem(
+            currentItems = getBudgets(),
+            id = budgetId,
+            idOf = { it.id },
+            save = ::saveBudgets
+        )
+    }
+
     // --------------------------------------------------
     // Transfer
     // --------------------------------------------------
@@ -416,53 +423,36 @@ fun deleteBudget(
         transfer: Transfer
     ): Boolean {
 
-        val transfers =
-            getTransfers().toMutableList()
-
-        transfers.add(transfer)
-
-        return saveTransfers(transfers)
+        return addItem(
+            currentItems = getTransfers(),
+            item = transfer,
+            save = ::saveTransfers
+        )
     }
-    
+
     fun updateTransfer(
-    transfer: Transfer
-): Boolean {
+        transfer: Transfer
+    ): Boolean {
 
-    val transfers =
-        getTransfers().toMutableList()
-
-    val index =
-        transfers.indexOfFirst {
-            it.id == transfer.id
-        }
-
-    if (index == -1) {
-        return false
+        return updateItem(
+            currentItems = getTransfers(),
+            item = transfer,
+            idOf = { it.id },
+            save = ::saveTransfers
+        )
     }
 
-    transfers[index] = transfer
-
-    return saveTransfers(transfers)
-}
-    
     fun deleteTransfer(
-    transferId: String
-): Boolean {
+        transferId: String
+    ): Boolean {
 
-    val transfers =
-        getTransfers().toMutableList()
-
-    val removed =
-        transfers.removeAll {
-            it.id == transferId
-        }
-
-    if (!removed) {
-        return false
+        return deleteItem(
+            currentItems = getTransfers(),
+            id = transferId,
+            idOf = { it.id },
+            save = ::saveTransfers
+        )
     }
-
-    return saveTransfers(transfers)
-}
 
     // --------------------------------------------------
     // Settings
