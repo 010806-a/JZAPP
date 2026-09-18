@@ -226,7 +226,7 @@ setupTrendChart()
         binding.tvMonth.text =
             String.format(
                 Locale.getDefault(),
-                "%d年%d月⌄",
+                "%d年%d月",
                 currentYear,
                 currentMonth
             )
@@ -909,104 +909,75 @@ return
         trendChart.animateX(400)
     }
     
-    private fun updateDailyTrendChart(
-    bills: List<Bill>
-) {
+private fun updateDailyTrendChart(bills: List<Bill>) {
 
-    val monthBills =
-        getBillsForMonth(
-            bills,
-            currentYear,
-            currentMonth
-        )
+    val calendar = Calendar.getInstance().apply {
+        set(Calendar.YEAR, currentYear)
+        set(Calendar.MONTH, currentMonth - 1)
+        set(Calendar.DAY_OF_MONTH, 1)
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 
-    val previousBills =
-        getBillsForMonth(
-            bills,
-            getPreviousYear(),
-            getPreviousMonth()
-        )
+    val startTime = calendar.timeInMillis
 
-    val calendar =
-        Calendar.getInstance().apply {
-            clear()
-            set(
-                currentYear,
-                currentMonth - 1,
-                1
-            )
-        }
+    calendar.add(Calendar.MONTH, 1)
 
-    val daysInMonth =
-        calendar.getActualMaximum(
-            Calendar.DAY_OF_MONTH
-        )
+    val endTime = calendar.timeInMillis
 
-    val dailyIncome =
-        mutableMapOf<Int, Double>()
+    val monthBills = bills.filter {
+        it.timestamp >= startTime &&
+            it.timestamp < endTime
+    }
 
-    val dailyExpense =
-        mutableMapOf<Int, Double>()
+    val daysInMonth = calendar.apply {
+        add(Calendar.MONTH, -1)
+    }.getActualMaximum(Calendar.DAY_OF_MONTH)
+
+    val expenseByDay = DoubleArray(daysInMonth)
+    val incomeByDay = DoubleArray(daysInMonth)
 
     monthBills.forEach { bill ->
 
-        val billCalendar =
-            Calendar.getInstance()
+        val billCalendar = Calendar.getInstance()
+        billCalendar.timeInMillis = bill.timestamp
 
-        billCalendar.timeInMillis =
-            bill.timestamp
+        val day = billCalendar.get(Calendar.DAY_OF_MONTH)
 
-        val day =
-            billCalendar.get(
-                Calendar.DAY_OF_MONTH
-            )
+        if (day in 1..daysInMonth) {
 
-        when (bill.type) {
+            when (bill.type) {
 
-            BillType.INCOME -> {
-                dailyIncome[day] =
-                    (dailyIncome[day] ?: 0.0) +
-                            bill.amount
-            }
+                BillType.EXPENSE -> {
+                    expenseByDay[day - 1] += bill.amount
+                }
 
-            BillType.EXPENSE -> {
-                dailyExpense[day] =
-                    (dailyExpense[day] ?: 0.0) +
-                            bill.amount
+                BillType.INCOME -> {
+                    incomeByDay[day - 1] += bill.amount
+                }
+
+                else -> Unit
             }
         }
     }
 
-    val entries =
-        mutableListOf<Entry>()
-
-    var cumulativeBalance =
-        0.0
+    val entries = mutableListOf<Entry>()
 
     for (day in 1..daysInMonth) {
 
-        val income =
-            dailyIncome[day] ?: 0.0
+        val value = when (currentTrendType) {
 
-        val expense =
-            dailyExpense[day] ?: 0.0
+            TrendType.EXPENSE ->
+                expenseByDay[day - 1]
 
-        val value =
-            when (currentTrendType) {
+            TrendType.INCOME ->
+                incomeByDay[day - 1]
 
-                TrendType.EXPENSE ->
-                    expense
-
-                TrendType.INCOME ->
-                    income
-
-                TrendType.BALANCE -> {
-                    cumulativeBalance +=
-                        income - expense
-
-                    cumulativeBalance
-                }
-            }
+            TrendType.BALANCE ->
+                incomeByDay[day - 1] - expenseByDay[day - 1]
+        }
 
         entries.add(
             Entry(
@@ -1016,25 +987,15 @@ return
         )
     }
 
+    val labels = mutableListOf<String>()
+
+    for (day in 1..daysInMonth) {
+        labels.add(day.toString())
+    }
+
     applyTrendData(
         entries = entries,
-        labels = { value ->
-
-            val day =
-                value.toInt()
-
-            if (day in 1..daysInMonth) {
-                "$day/$currentMonth"
-            } else {
-                ""
-            }
-        }
-    )
-
-    updateTrendSummary(
-        monthBills,
-        previousBills,
-        daysInMonth
+        labels = labels
     )
 }
     private fun updateMonthlyTrendChart(
