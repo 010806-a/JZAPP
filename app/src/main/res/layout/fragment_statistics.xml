@@ -1,178 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
+<LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+     android:layout_width="match_parent"
+     android:background="@color/background"
+     android:orientation="vertical">
 
-    <!-- 顶部标题 -->
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="16dp">
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:paddingEnd="16dp"
+         android:orientation="vertical"
+         android:paddingStart="16dp"
+         android:paddingTop="12dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="统计"
-            android:textColor="@color/text_primary"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="25sp"
+             android:textColor="@color/text_primary"
+             android:text="统计"
+             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="看懂每一笔 · 掌握消费趋势"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
+             android:layout_height="wrap_content"
+             android:layout_width="wrap_content"
+             android:textSize="13sp"
+             android:textColor="@color/text_secondary"
+             android:layout_marginTop="3dp"
+             android:text="看懂每一笔 · 掌握消费趋势" />
 
-        <!-- 月份选择 -->
         <LinearLayout
-            android:id="@+id/monthSelector"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="6dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+             android:layout_height="40dp"
+             android:layout_width="wrap_content"
+             android:paddingEnd="8dp"
+             android:gravity="center_vertical"
+             android:clickable="true"
+             android:orientation="horizontal"
+             android:paddingStart="12dp"
+             android:focusable="true"
+             android:id="@+id/monthSelector">
 
             <TextView
-                android:id="@+id/tvMonth"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:text="2026年9月⌄"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                 android:layout_height="wrap_content"
+                 android:layout_width="wrap_content"
+                 android:textSize="15sp"
+                 android:textColor="@android:color/black"
+                 android:id="@+id/tvMonth"
+                 android:text="2026年9月"
+                 android:textStyle="bold" />
+
+            <ImageView
+                 android:layout_height="16dp"
+                 android:layout_width="16dp"
+                 android:src="@drawable/ic_arrow_down"
+                 android:contentDescription="选择月份"
+                 android:layout_marginStart="4dp"
+                 android:id="@+id/ivMonthArrow" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:fillViewport="true"
-        android:scrollbars="none">
+         android:layout_height="0dp"
+         android:layout_width="match_parent"
+         android:scrollbars="none"
+         android:fillViewport="true"
+         android:clipToPadding="false"
+         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="28dp">
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent"
+             android:paddingEnd="16dp"
+             android:orientation="vertical"
+             android:paddingBottom="28dp"
+             android:paddingStart="16dp">
 
-            <!-- 本月收支 -->
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="148dp"
-                app:cardBackgroundColor="@color/primary"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 app:cardElevation="0dp"
+                 app:strokeWidth="0dp"
+                 app:cardBackgroundColor="@color/primary"
+                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="18dp">
+                     android:layout_height="match_parent"
+                     android:layout_width="match_parent"
+                     android:padding="18dp"
+                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="本月收支"
-                        android:textColor="@android:color/white"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textSize="15sp"
+                         android:textColor="@android:color/white"
+                         android:text="本月收支"
+                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvBalance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="¥0.00"
-                        android:textColor="@android:color/white"
-                        android:textSize="30sp"
-                        android:textStyle="bold" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textSize="30sp"
+                         android:textColor="@android:color/white"
+                         android:layout_marginTop="5dp"
+                         android:id="@+id/tvBalance"
+                         android:text="¥0.00"
+                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="本月结余"
-                        android:textColor="#B8C4FF"
-                        android:textSize="11sp" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textSize="11sp"
+                         android:textColor="#B8C4FF"
+                         android:text="本月结余" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal">
+                         android:layout_height="0dp"
+                         android:layout_width="match_parent"
+                         android:orientation="horizontal"
+                         android:layout_marginTop="10dp"
+                         android:layout_weight="1">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:orientation="vertical"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="本月收入"
-                                android:textColor="#B8C4FF"
-                                android:textSize="11sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="11sp"
+                                 android:textColor="#B8C4FF"
+                                 android:text="本月收入" />
 
                             <TextView
-                                android:id="@+id/tvTotalIncome"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="¥0.00"
-                                android:textColor="@android:color/white"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="16sp"
+                                 android:textColor="@android:color/white"
+                                 android:layout_marginTop="3dp"
+                                 android:id="@+id/tvTotalIncome"
+                                 android:text="¥0.00"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <View
-                            android:layout_width="1dp"
-                            android:layout_height="34dp"
-                            android:layout_gravity="center_vertical"
-                            android:background="#55FFFFFF" />
+                             android:layout_height="34dp"
+                             android:layout_width="1dp"
+                             android:background="#55FFFFFF"
+                             android:layout_gravity="center_vertical" />
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:paddingStart="16dp"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:orientation="vertical"
+                             android:paddingStart="16dp"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="本月支出"
-                                android:textColor="#B8C4FF"
-                                android:textSize="11sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="11sp"
+                                 android:textColor="#B8C4FF"
+                                 android:text="本月支出" />
 
                             <TextView
-                                android:id="@+id/tvTotalExpense"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="¥0.00"
-                                android:textColor="@android:color/white"
-                                android:textSize="16sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="16sp"
+                                 android:textColor="@android:color/white"
+                                 android:layout_marginTop="3dp"
+                                 android:id="@+id/tvTotalExpense"
+                                 android:text="¥0.00"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -182,205 +188,208 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 收支趋势标题 -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                 android:layout_marginTop="18dp">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="收支趋势"
-                    android:textColor="@color/text_primary"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvTrendPeriod"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="按日"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
+                     android:layout_height="wrap_content"
+                     android:layout_width="0dp"
+                     android:textSize="17sp"
+                     android:textColor="@color/text_primary"
+                     android:layout_weight="1"
+                     android:text="收支趋势"
+                     android:textStyle="bold" />
+<TextView
+     android:id="@+id/tvTrendPeriod"
+     android:layout_width="wrap_content"
+     android:layout_height="36dp"
+     android:gravity="center"
+     android:minWidth="56dp"
+     android:paddingStart="12dp"
+     android:paddingEnd="12dp"
+     android:text="按日"
+     android:textColor="@color/text_secondary"
+     android:textSize="12sp"
+     android:clickable="true"
+     android:focusable="true" />
 
             </LinearLayout>
 
-            <!-- 趋势 Tab -->
             <LinearLayout
-                android:id="@+id/trendTabs"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" />
+                 android:layout_height="36dp"
+                 android:layout_width="match_parent"
+                 android:orientation="horizontal"
+                 android:layout_marginTop="10dp"
+                 android:id="@+id/trendTabs">
 
-            <!-- 趋势卡片 -->
+            </LinearLayout>
+
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 app:cardElevation="0dp"
+                 app:strokeWidth="0dp"
+                 app:cardBackgroundColor="@android:color/white"
+                 android:layout_marginTop="10dp"
+                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:padding="18dp"
+                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:gravity="center_vertical"
+                         android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:orientation="vertical"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:id="@+id/tvTrendLabel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="本月支出"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="13sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="13sp"
+                                 android:textColor="@color/text_secondary"
+                                 android:id="@+id/tvTrendLabel"
+                                 android:text="本月支出" />
 
                             <TextView
-                                android:id="@+id/tvTrendValue"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="4dp"
-                                android:text="¥0.00"
-                                android:textColor="@color/text_primary"
-                                android:textSize="23sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="23sp"
+                                 android:textColor="@color/text_primary"
+                                 android:layout_marginTop="4dp"
+                                 android:id="@+id/tvTrendValue"
+                                 android:text="¥0.00"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tvTrendChange"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_bill_summary_clip"
-                            android:paddingStart="8dp"
-                            android:paddingTop="5dp"
-                            android:paddingEnd="8dp"
-                            android:paddingBottom="5dp"
-                            android:text="较上月"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="10sp" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:paddingEnd="8dp"
+                             android:background="@drawable/bg_bill_summary_clip"
+                             android:paddingBottom="5dp"
+                             android:textSize="10sp"
+                             android:textColor="@color/text_secondary"
+                             android:paddingStart="8dp"
+                             android:id="@+id/tvTrendChange"
+                             android:paddingTop="5dp"
+                             android:text="较上月" />
 
                     </LinearLayout>
 
                     <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/expenseTrendChart"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginTop="12dp" />
+                         android:layout_height="180dp"
+                         android:layout_width="match_parent"
+                         android:layout_marginTop="12dp"
+                         android:id="@+id/expenseTrendChart" />
 
-                    <!-- 趋势辅助数据 -->
                     <LinearLayout
-                        android:id="@+id/dailySummaryLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:orientation="horizontal">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:orientation="horizontal"
+                         android:layout_marginTop="4dp"
+                         android:id="@+id/dailySummaryLayout">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:gravity="center"
+                             android:orientation="vertical"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="日均"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="11sp"
+                                 android:textColor="@color/text_secondary"
+                                 android:text="日均" />
 
                             <TextView
-                                android:id="@+id/tvDailyAverage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="¥0.00"
-                                android:textColor="@color/text_primary"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="15sp"
+                                 android:textColor="@color/text_primary"
+                                 android:layout_marginTop="3dp"
+                                 android:id="@+id/tvDailyAverage"
+                                 android:text="¥0.00"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <View
-                            android:layout_width="1dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:background="@color/background" />
+                             android:layout_height="30dp"
+                             android:layout_width="1dp"
+                             android:background="@color/background"
+                             android:layout_gravity="center" />
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:gravity="center"
+                             android:orientation="vertical"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="最高日"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="11sp"
+                                 android:textColor="@color/text_secondary"
+                                 android:text="最高日" />
 
                             <TextView
-                                android:id="@+id/tvHighestDaily"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="¥0.00"
-                                android:textColor="@color/text_primary"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="15sp"
+                                 android:textColor="@color/text_primary"
+                                 android:layout_marginTop="3dp"
+                                 android:id="@+id/tvHighestDaily"
+                                 android:text="¥0.00"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <View
-                            android:layout_width="1dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:background="@color/background" />
+                             android:layout_height="30dp"
+                             android:layout_width="1dp"
+                             android:background="@color/background"
+                             android:layout_gravity="center" />
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:gravity="center"
+                             android:orientation="vertical"
+                             android:layout_weight="1">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="最高日"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="11sp"
+                                 android:textColor="@color/text_secondary"
+                                 android:text="最高日" />
 
                             <TextView
-                                android:id="@+id/tvHighestDailyDate"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:text="暂无"
-                                android:textColor="@color/text_primary"
-                                android:textSize="15sp"
-                                android:textStyle="bold" />
+                                 android:layout_height="wrap_content"
+                                 android:layout_width="wrap_content"
+                                 android:textSize="15sp"
+                                 android:textColor="@color/text_primary"
+                                 android:layout_marginTop="3dp"
+                                 android:id="@+id/tvHighestDailyDate"
+                                 android:text="暂无"
+                                 android:textStyle="bold" />
 
                         </LinearLayout>
 
@@ -390,112 +399,110 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- 支出分类标题 -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 android:gravity="center_vertical"
+                 android:orientation="horizontal"
+                 android:layout_marginTop="18dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                     android:layout_height="wrap_content"
+                     android:layout_width="0dp"
+                     android:orientation="vertical"
+                     android:layout_weight="1">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="支出分类"
-                        android:textColor="@color/text_primary"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textSize="17sp"
+                         android:textColor="@color/text_primary"
+                         android:text="支出分类"
+                         android:textStyle="bold" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="看看钱主要花在哪里"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="wrap_content"
+                         android:textSize="12sp"
+                         android:textColor="@color/text_secondary"
+                         android:layout_marginTop="3dp"
+                         android:text="看看钱主要花在哪里" />
 
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:contentDescription="分类统计"
-                    android:src="@drawable/ic_statistics_a" />
+                     android:layout_height="28dp"
+                     android:layout_width="28dp"
+                     android:contentDescription="分类统计"
+                     android:src="@drawable/ic_statistics_a" />
 
             </LinearLayout>
 
-            <!-- 分类卡片 -->
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:strokeWidth="0dp">
+                 android:layout_height="wrap_content"
+                 android:layout_width="match_parent"
+                 app:cardElevation="0dp"
+                 app:strokeWidth="0dp"
+                 app:cardBackgroundColor="@android:color/white"
+                 android:layout_marginTop="10dp"
+                 app:cardCornerRadius="20dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="18dp">
+                     android:layout_height="wrap_content"
+                     android:layout_width="match_parent"
+                     android:padding="18dp"
+                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:gravity="center_vertical"
+                         android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="本月支出"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="12sp" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="0dp"
+                             android:textSize="12sp"
+                             android:textColor="@color/text_secondary"
+                             android:layout_weight="1"
+                             android:text="本月支出" />
 
                         <TextView
-                            android:id="@+id/tvCategoryTotal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="¥0.00"
-                            android:textColor="@color/text_primary"
-                            android:textSize="17sp"
-                            android:textStyle="bold" />
+                             android:layout_height="wrap_content"
+                             android:layout_width="wrap_content"
+                             android:textSize="17sp"
+                             android:textColor="@color/text_primary"
+                             android:id="@+id/tvCategoryTotal"
+                             android:text="¥0.00"
+                             android:textStyle="bold" />
 
                     </LinearLayout>
 
-                    <!-- 圆环图 -->
                     <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pieChart"
-                        android:layout_width="match_parent"
-                        android:layout_height="230dp"
-                        android:layout_marginTop="2dp" />
+                         android:layout_height="230dp"
+                         android:layout_width="match_parent"
+                         android:layout_marginTop="2dp"
+                         android:id="@+id/pieChart" />
 
                     <TextView
-                        android:id="@+id/tvCategoryEmpty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:paddingTop="30dp"
-                        android:paddingBottom="30dp"
-                        android:text="本月暂无支出"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        android:visibility="gone" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:visibility="gone"
+                         android:gravity="center"
+                         android:paddingBottom="30dp"
+                         android:textSize="13sp"
+                         android:textColor="@color/text_secondary"
+                         android:id="@+id/tvCategoryEmpty"
+                         android:paddingTop="30dp"
+                         android:text="本月暂无支出" />
 
-                    <!-- 分类列表 -->
                     <LinearLayout
-                        android:id="@+id/layoutCategoryStatistics"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical" />
+                         android:layout_height="wrap_content"
+                         android:layout_width="match_parent"
+                         android:orientation="vertical"
+                         android:id="@+id/layoutCategoryStatistics">
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

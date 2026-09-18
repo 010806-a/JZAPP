@@ -57,9 +57,16 @@ class StatisticsFragment : Fragment() {
         INCOME,
         BALANCE
     }
+    private enum class TrendPeriod {
+    DAY,
+    MONTH,
+    YEAR
+}
 
     private var currentTrendType =
         TrendType.EXPENSE
+    private var currentTrendPeriod =
+    TrendPeriod.DAY     
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,10 +93,11 @@ class StatisticsFragment : Fragment() {
         currentMonth =
             calendar.get(Calendar.MONTH) + 1
 
-        setupMonthSelector()
-        setupTrendTabs()
-        setupPieChart()
-        setupTrendChart()
+ setupMonthSelector()
+setupTrendPeriodSelector()
+setupTrendTabs()
+setupPieChart()
+setupTrendChart()
 
         updateMonthText()
         refreshStatistics()
@@ -127,6 +135,53 @@ class StatisticsFragment : Fragment() {
             showMonthPicker()
         }
     }
+    
+    private fun setupTrendPeriodSelector() {
+
+    binding.tvTrendPeriod.setOnClickListener {
+
+        val items =
+            arrayOf(
+                "按日",
+                "按月",
+                "按年"
+            )
+
+        val checkedItem =
+            when (currentTrendPeriod) {
+                TrendPeriod.DAY -> 0
+                TrendPeriod.MONTH -> 1
+                TrendPeriod.YEAR -> 2
+            }
+
+        androidx.appcompat.app.AlertDialog.Builder(
+            requireContext()
+        )
+            .setTitle("选择统计周期")
+            .setSingleChoiceItems(
+                items,
+                checkedItem
+            ) { dialog, which ->
+
+                currentTrendPeriod =
+                    when (which) {
+                        0 -> TrendPeriod.DAY
+                        1 -> TrendPeriod.MONTH
+                        else -> TrendPeriod.YEAR
+                    }
+
+                binding.tvTrendPeriod.text =
+                    items[which]
+
+                dialog.dismiss()
+
+                updateTrendChart(
+                    repository.getBills()
+                )
+            }
+            .show()
+    }
+}
 
     /**
      * 打开月份选择器。
@@ -588,6 +643,22 @@ private fun updateTrendTabStyle() {
     private fun updateTrendChart(
         bills: List<Bill>
     ) {
+    when (currentTrendPeriod) {
+
+    TrendPeriod.DAY -> {
+        updateDailyTrendChart(bills)
+    }
+
+    TrendPeriod.MONTH -> {
+        updateMonthlyTrendChart(bills)
+    }
+
+    TrendPeriod.YEAR -> {
+        updateYearlyTrendChart(bills)
+    }
+}
+
+return
 
         val monthBills =
             getBillsForMonth(
