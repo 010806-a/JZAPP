@@ -1,80 +1,47 @@
-# GEMINI.md — MoneyBook（JZ）
+# GEMINI.md
 
-本文件与 AGENTS.md 约束一致；详细内容以 `MoneyBook_项目完整开发记录.md` 为准。
+本文件是提供给 **Gemini / Gemini CLI** 在本仓库中工作时使用的上下文文件。内容与 [`AGENTS.md`](./AGENTS.md) 保持同步（面向所有通用编码 Agent 的规则以那份文件为准），本文件只补充 Gemini CLI 特有的使用建议。完整架构文档见 [`JZAPP_项目完整开发文档.md`](./JZAPP_项目完整开发文档.md)。
 
-给任何 AI 编码助手（Claude Code、Codex、Cursor 等）在本仓库工作前必读的规则。
+## 项目速览
 
-**权威文档：** [`MoneyBook_项目完整开发记录.md`](./MoneyBook_项目完整开发记录.md)。本文件是浓缩版 + 硬性规则。
+- **项目**：MoneyBook 记账 App，包名 `com.example.myno.jz`。
+- **定位**：完全离线的个人记账工具，Kotlin + Android View 体系 + ViewBinding，**无 Compose、无 Room、无 Hilt/Koin**。
+- **数据落地**：JSON 文件（`Gson`，存于 `filesDir`）+ `SharedPreferences`（配置/安全数据）+ `AndroidKeyStore`（邮箱授权码加密）。
+- **模块速查**：
+  - `data/model` 数据模型　`data/local`+`data/repository` 持久化　`data/imports` 账单导入解析　`data/email` 邮件收发
+  - `utils` 工具类（日志/崩溃捕获/日期计算/自研 XLSX 导出）
+  - `ui/<domain>` 各功能页面（home/bills/assets/budget/category/statistics/backup/email/privacy/settings/mine/quick/main）
 
-## 0. 项目定位
+## 在本仓库中做修改时，请遵循
 
-- Kotlin + XML/ViewBinding + Material 3
-- Gson + JSON 本地存储；无 Room/SQLite/Compose
-- 仅安全邮箱功能使用 IMAP/SMTP
-- 用户不熟悉 Kotlin/Android：修改 Kotlin/XML 时提供完整文件，不给需要自行拼接的片段
+1. **先读文档再动代码**：涉及导入解析（`data/imports/*`、`ui/bills/ImportPreviewFragment.kt`）、隐私锁（`ui/privacy/*`、`data/repository/PrivacyLockStore.kt`）、备份（`data/repository/BackupRepository.kt`）这几个模块之前，务必先查阅 `JZAPP_项目完整开发文档.md` 对应章节，这几处逻辑分支多、隐含业务规则密集，容易改错。
+2. **保持现有代码风格**：中文注释、"具名参数逐行换行"的格式习惯（见 `AGENTS.md` 示例），不要用格式化工具把已有代码"优化"成紧凑单行，那会制造巨大的无意义 diff。
+3. **不要引入新框架**：不要为了"更现代"而引入 Compose、Room、Retrofit、Hilt 等，除非用户在当前对话中明确提出架构升级需求。
+4. **数据模型改动要看 `JsonDataStore` 的序列化影响**：`Account`/`Bill`/`Category`/`Budget`/`Transfer`/`AppSettings` 都会被 Gson 直接落地成本地 JSON 文件，新增字段必须给默认值，不能贸然重命名/删除字段。
+5. **导出功能零依赖**：`utils/ExcelExporter.kt` 是手写的 OOXML/ZIP 生成器，**不要**引入 Apache POI 等库来"简化"它——这是项目刻意的架构选择（减少体积、避免 minSdk 23 上的兼容性问题）。
+6. **日志走 `AppLogger`**：不要新增裸的 `Log.d`/`println`，统一调用 `com.example.myno.jz.utils.AppLogger.i/w/e/crash`。
 
-## 1. 当前代码基线（2026-09-16）
+## 已知的空占位文件（不要误认为是功能入口）
 
-本仓库已完成一次“代码核对 + 两阶段保守瘦身”。当前新增/优化内容包括：
-- `ui/common/FragmentNavigation.kt`：统一 Fragment transaction 模板
-- `MineFragment`：重复导航逻辑整理，保留所有既有入口
-- `fragment_mine.xml`：压缩重复卡片结构，保留 binding ID
-- `SettingsFragment.kt`：重复单选 Dialog 统一为 `showChoiceDialog()`
-- `fragment_settings.xml`：9 个 Row 使用 `MoneyBookSettingsRow`，5 个 Card 使用 `MoneyBookSettingsCard`
-- `values/styles.xml`：新增 `MoneyBookSettingsCard`
-- 清理 `.acside` 编辑器缓存
-- 未确认安全可删除的 drawable 均保留
+`ui/account/AccountActivity.kt`、`ui/budget/BudgetActivity.kt`、`ui/category/CategoryActivity.kt`、`ui/lock/LockActivity.kt`、`ui/backup/BackupActivity.kt`、`ui/importbill/ImportBillActivity.kt`、`ui/addbill/AddBillBottomSheet.kt`、`utils/BackupManager.kt`、`utils/NaturalLanguageParser.kt` —— 均为空类，未接入 `AndroidManifest.xml`，真正功能在对应的 `XxxFragment` 或 `BackupRepository` 里。详见 `JZAPP_项目完整开发文档.md` 第 11 节。
 
-## 2. 不得删除的未完成功能
+## 构建/验证注意事项
 
-以下文件目前为空/占位，但代表明确的未完成功能或历史兼容结构，**不要为了瘦身删除或重新激活**：
+- 本地/沙箱环境如无网络，`./gradlew` 相关命令大概率无法完整跑通（首次同步需下载 Gradle 依赖），**不要在未确认网络可用的情况下断言构建结果**。
+- 项目当前**没有任何单元测试或 Instrumented 测试**。若新增了 `utils/`、`data/imports/` 下的纯逻辑代码，建议主动在 `app/src/test/kotlin/...`（需新建目录）补充 JUnit 测试，而不是假设已有测试基线可以复用。
+- 修改 XML 布局中的 `android:id` 时，请同步检查所有通过 ViewBinding（`binding.xxx`）引用它的 Kotlin 代码，ViewBinding 是编译期生成代码，id 不匹配会导致整个 `:app` 模块编译失败，而不仅仅是某个类报错。
 
-- `utils/ExcelExporter.kt`
-- `utils/NaturalLanguageParser.kt`
-- `utils/BackupManager.kt`
-- `ui/category/CategoryActivity.kt`
-- `ui/budget/BudgetActivity.kt`
-- `ui/backup/BackupActivity.kt`
-- `ui/lock/LockActivity.kt`
+## 提交前自检
 
-上述 Activity 未在 Manifest 注册；真实功能分别在对应 Fragment 中。
+- [ ] 是否保持了中文注释与逐行换行的代码风格？
+- [ ] `data.model` 新增字段是否有默认值？
+- [ ] 是否复用 `AppLogger` 记录日志？
+- [ ] CSV 与 XLSX 两条导入解析路径的"中性交易"（转账类）处理是否保持一致（目前两者本就不一致，见文档第 11 节，如果你在修其中一个，请判断是否需要顺手同步另一个）？
+- [ ] 是否为新增纯逻辑代码补充了单元测试？
 
-`AppSettings.lockType/pin/pattern` 为死字段。隐私锁真实实现是 `PrivacyLockStore` + `PrivacyLockConfig`，不要重新把旧字段接回去。
+## 参考文档
 
-## 3. 架构硬约束
-
-- 不引入 Room / SQLite / Compose / 服务器登录 / 网络同步
-- 不删除 Gson 或 `JsonDataStore`
-- 不改 `applicationId` / `namespace` / JSON 文件名
-- 不删除模型字段、不改变字段语义
-- 不创建第二套 Repository、核心模型或记账入口
-- `Transfer` 永远不计入收入/支出
-- 账户关联只用 `Account.id`
-- 余额公式固定：`balance = account.balance + income − expense − transferOut + transferIn`
-
-## 4. 当前功能断点
-
-已完成：默认账户/分类/记账类型/记账后行为、分类、预算、统计、隐私锁 PIN/图案、安全邮箱找回、首页快捷操作、桌面快捷方式、主题/动画等。
-
-剩余：
-1. 备份恢复扩展到其余核心 JSON
-2. Excel 导出
-3. 自然语言记账
-4. 日期格式/金额小数位全局应用
-5. 在上述功能稳定后继续分模块深层瘦身与回归测试
-
-## 5. 工作方式
-
-一次聚焦一个模块/阶段；即使用户提出“大范围优化”，也应分阶段提交，避免同时改动数据层与多个高复杂度 UI。
-
-每次修改后：静态检查 → 本地可用环境编译 → 用户设备测试 → 更新主文档与 CHANGELOG。没有真实 Build Output 时，不得声称 Android 编译成功。
-
-## 6. 完成后文档同步
-
-任何结构/功能变更后同步：
-- `MoneyBook_项目完整开发记录.md`
-- `MoneyBook_项目完整开发记录_2026-09-16_UI更新.md`（若涉及本次 UI/瘦身基线）
-- `README.md`
-- `GEMINI.md`
-- `REFACTOR_20260916.md`
-- `CHANGELOG.md`
+- 全量架构与类清单：[`JZAPP_项目完整开发文档.md`](./JZAPP_项目完整开发文档.md)
+- 通用 Agent 规则（更详细版本）：[`AGENTS.md`](./AGENTS.md)
+- 人类可读概览：[`README.md`](./README.md)
+- 变更记录：[`CHANGELOG.md`](./CHANGELOG.md)

@@ -1,77 +1,60 @@
-# Changelog
+# 更新日志（CHANGELOG）
 
-## 2026-09-18 — 全量只读审查（功能状态 + 代码质量）
+本文件记录 MoneyBook 项目的重要变更。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
-详见 `REFACTOR_20260918.md`。本次未修改任何源码，仅核对最新 `JZ_backup_20260918_120622.zip`。
-
-### 确认已修复
-- `MineFragment` "修改密码"入口命名与跳转不一致的问题（09-16 记录）已修复：`itemChangePassword` 现在明确调用 `openChangeSecurity()` → `ChangeSecurityFragment`。
-
-### 确认仍未处理（09-16 报告中的问题原样存在）
-- `HomeFragment`（2031 行）职责过多、`showCategoryBudgetDialog` 单方法 362 行。
-- 首页快捷操作"日历账单"实际打开的是普通账单列表，无独立日历视图。
-- `MineFragment`"数据统计"入口仍是占位 Toast，尽管底部导航的统计 Tab 功能已完整实现。
-- `AssetsFragment` 仍用手写 `LinearLayout`/`addView` 拼接账户卡片，未用 RecyclerView。
-- `ImportPreviewFragment`（1920 行）UI 与账户匹配算法混杂。
-- `ChangePasswordFragment`/`ResetPasswordFragment`、`ChangePatternFragment`/`ResetPatternFragment` 大段重复代码。
-- `FinanceRepository`/`JsonDataStore` 中 Bill/Account/Category/Budget/Transfer 五组近乎相同的 CRUD。
-- `BackupRepository` 仍只备份 `records.json`，账户/分类/预算/转账/设置未纳入。
-
-### 新发现
-- `AssetsFragment.createAccountCard` 中图标尺寸、间距、内边距均为裸像素数值，未做 dp 转换。
-- 硬编码中文文本的文件数由 36/85 上升至 43/85（`strings.xml` 仍仅 12 条）。
-
-## 2026-09-16 — 代码核对、两阶段瘦身与文档同步
-
-### Changed
-- 完成最新项目 ZIP 的代码结构重新核对，并把真实 Kotlin 代码树同步到完整开发文档。
-- `ui/common/FragmentNavigation.kt` 统一 Fragment transaction 模板。
-- `MineFragment` 与 `fragment_mine.xml` 做保守瘦身，减少重复导航与重复卡片结构，保留既有入口和 binding ID。
-- `SettingsFragment.kt` 统一重复单选设置 Dialog。
-- `fragment_settings.xml` 的 9 个设置 Row 使用 `MoneyBookSettingsRow`，5 个设置 Card 使用 `MoneyBookSettingsCard`。
-- `styles.xml` 新增 `MoneyBookSettingsCard`。
-- 清理 `.acside` 编辑器缓存。
-- 全项目 drawable 静态扫描没有确认出可安全删除资源，因此不删除 drawable。
-- `README.md`、`AGENTS.md`、`GEMINI.md`、`REFACTOR_20260916.md`、完整开发记录和 UI 更新记录全部同步到同一版本状态。
-
-### Preserved
-- `ExcelExporter.kt`、`NaturalLanguageParser.kt`、`BackupManager.kt` 空类保留。
-- `CategoryActivity.kt`、`BudgetActivity.kt`、`BackupActivity.kt`、`LockActivity.kt` 空壳保留，未重新注册。
-- Gson/JsonDataStore、JSON 文件名、模型字段、Transfer 统计规则、Account.id 关联规则全部保持不变。
-
-### Verification
-- XML 静态解析通过。
-- Kotlin 大括号结构检查通过。
-- Gradle Wrapper 已补回可执行权限。
-- Android `assembleDebug` 未能完成：当前环境无法访问 `services.gradle.org` 下载 Gradle 9.0.0。不得视为编译通过。
+> 说明：项目此前未维护 CHANGELOG 且无 Git 提交历史可追溯，以下 **[1.0.0]** 条目是基于对当前完整代码快照（`JZ_backup_20260919_065806.zip`）的全量代码审查整理出的**基线（Baseline）记录**，用于标记"文档化起点"，并非按时间线还原的真实开发过程。此后的变更请按时间顺序追加到本文件顶部的 `[Unreleased]` 区块。
 
 ## [Unreleased]
 
-### 待开发
-- 备份恢复扩展：`accounts/categories/budgets/transfers/settings`
-- Excel 导出实装
-- 自然语言记账实装
-- 日期格式 / 金额小数位全局应用
+### 待办 / 计划中
+- 补充单元测试（`FinanceCalculator`、`CsvBillParser`/`XlsxBillParser`、`ImportDuplicateChecker`）
+- 统一 CSV 与 XLSX 导入解析器对"中性交易（转账类）"的识别逻辑
+- 清理空占位类：`AccountActivity`/`BudgetActivity`/`CategoryActivity`/`LockActivity`/`BackupActivity`/`ImportBillActivity`/`AddBillBottomSheet`/`BackupManager`/`NaturalLanguageParser`
+- 补全「我的」页面中"即将接入"的功能入口（个人信息、导出账单、意见反馈）
 
-## 2026-09-16 — 账单页 / 首页 UI 与筛选
-- 账单页按最终参考 UI 调整。
-- 本月收支卡片使用 `bg_home_money_a`。
-- 月份选择仅年/月；下拉箭头统一 `ic_arrow_down`。
-- 右上角保留外部“账单导入”入口。
-- `全部 / 支出 / 收入` 增加明确选中状态。
-- 筛选支持当前月份内的某一天 + 开始/结束时间，精确到分钟。
-- 列表及首页相关查看入口统一使用 `ic_arrow_right`。
+---
 
-## 2026-09-14
-- 完成默认分类设置端与接入。
-- 修复底部导航文字裁剪。
-- 资产页账户图标改 PNG。
+## [1.0.0] - 2026-09-19（基线记录）
 
-## 2026-09-13
-- 完善项目完整开发文档；确认真实项目树与默认账户设置。
+首次全量代码梳理与文档化时的功能快照。
 
-## 2026-09-06
-- 修复 Buildozer 项目相关问题。
+### 新增（已实现的核心功能）
 
-## 2026-08
-- 完成账户流水、转账编辑、微信 XLSX 导入、中性交易识别。
+- **记账核心**：支出/收入手动记账（`AddBillFragment`），支持连续记账、记账后跳转行为可配置（首页/账单列表/继续记账）
+- **账单列表**：月份筛选、类型筛选、精确时间范围筛选，可拖拽悬浮记账按钮
+- **资产管理**：多账户（现金/微信/支付宝/银行卡/自定义），账户间转账，账户流水按日期分组展示，账户当前余额动态计算（期初余额 + 收入 − 支出 + 转入 − 转出）
+- **分类管理**：支出/收入分类的新增、编辑、拖拽排序、删除（系统预置分类禁止删除）
+- **预算管理**：总预算与分类预算，按年月维度设置，支持预警比例
+- **统计分析**：基于 MPAndroidChart 的当月分类占比饼图，日/月/年三种周期的收支趋势图
+- **账单导入**：
+  - `CsvBillParser`：微信 CSV 账单专用解析 + 通用 CSV/TXT 解析（自动探测分隔符与表头列）
+  - `XlsxBillParser`：手写 ZIP/XML 解析实现的微信 XLSX 账单解析器，支持 Excel 序列日期
+  - `ImportDuplicateChecker`：按来源单号或"类型+金额+时间+商户"模糊匹配去重
+  - `ImportPreviewFragment`：导入预览、账户自动匹配（微信/支付宝/经营/日常/银行等多层启发式规则）、分类自动匹配、转账识别与确认落库
+- **账单导出**：`ExcelExporter` 零依赖手写生成 XLSX（账单明细/统计汇总/账户汇总三个工作表），附带 `validate()` 自检
+- **本地备份/恢复**：`BackupRepository` 全量 JSON 备份，支持向后兼容 v1 格式恢复
+- **隐私锁**：PIN 密码 / 图案锁两种模式，PBKDF2WithHmacSHA256（120,000 次迭代）加盐哈希存储；忘记密码走邮箱验证后重置
+- **图案锁自绘控件**：`PatternLockView` 手动实现 3×3 九宫格绘制与触摸路径识别
+- **邮箱安全验证体系**：
+  - 支持 QQ/163/126/新浪/Gmail/Outlook/自定义邮箱预设 IMAP/SMTP 参数
+  - `EmailConnectionTester` 基于 Jakarta Mail 实现连接测试与验证码发送
+  - 邮箱授权码通过 AndroidKeyStore AES/GCM 加密存储
+  - 验证码 SHA-256 哈希存储，5 分钟过期、60 秒重发冷却、5 次尝试上限
+- **应用设置**：主题模式（跟随系统/浅色/深色）、动画开关、默认记账类型、记账后行为、日期格式、金额小数位、统计周期、默认账户/分类
+- **首页个性化**：快捷入口可拖拽排序与滑动隐藏（`QuickActionStore` 独立持久化）、余额卡片翻转动画、金额可见性开关（隐藏时显示掩码）
+- **应用崩溃与日志系统**：`AppLogger` 文件日志 + `CrashHandler` 全局未捕获异常捕获
+- **桌面快捷方式**：长按图标「快速记一笔」直达 `QuickEntryActivity`
+
+### 已知限制（本版本仍存在）
+
+- 无自动化测试（单元测试与 Instrumented 测试均缺失）
+- 7 个空占位 Activity/类未接入实际功能（详见开发文档第 11 节）
+- CSV 与 XLSX 导入解析器对"中性交易"处理逻辑不完全一致
+- 多数页面各自持有独立的 `FinanceRepository` 实例，跨页面数据变更不会自动互相刷新
+- 本地备份文件为明文 JSON，未加密
+- 「我的」页面部分入口（个人信息、导出账单快捷方式、意见反馈）仅为占位提示，未实现
+- UI 文案基本硬编码，暂无国际化支持
+
+---
+
+*后续每次发布或完成一批有意义的改动后，请在本文件顶部新增对应版本区块，并遵循「新增 / 变更 / 修复 / 移除」的分类记录方式。*

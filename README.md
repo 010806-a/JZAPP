@@ -1,104 +1,97 @@
-# MoneyBook（记账本）
+# MoneyBook（JZ 记账 App）
 
-一款离线优先的 Android 个人记账应用。
+一款**完全离线**的 Android 个人记账应用。所有账单、账户、分类、预算和设置数据均保存在本机（JSON 文件 + SharedPreferences + Android Keystore），不依赖网络即可正常使用（仅"邮箱安全验证"这一项可选功能需要网络）。
 
-- **applicationId / namespace：** `com.example.myno.jz`
-- **语言：** Kotlin
-- **UI：** XML + ViewBinding + Material 3（无 Jetpack Compose）
-- **数据存储：** Gson + JSON 文件 + SharedPreferences
-- **网络：** 仅安全邮箱功能使用 IMAP/SMTP，其余业务保持本地优先
+> 包名：`com.example.myno.jz` ｜ 语言：Kotlin ｜ UI：View + ViewBinding（无 Compose）｜ minSdk 23 / targetSdk 34 / compileSdk 36
 
-> `MoneyBook_项目完整开发记录.md` 是当前唯一权威详细文档。本 README 与 `AGENTS.md`、`GEMINI.md`、`CHANGELOG.md`、`REFACTOR_20260916.md` 已按 2026-09-16 优化后的代码同步更新。
+## 功能特性
 
-## 功能状态
+- 📒 **记账**：支持支出/收入手动记账，自定义分类、账户，快速记账桌面快捷方式
+- 💰 **资产管理**：多账户（现金/微信/支付宝/银行卡/自定义），账户间转账，账户流水明细，动态计算当前余额
+- 📊 **统计分析**：当月分类占比饼图、日/月/年三种周期趋势图（基于 MPAndroidChart）
+- 🎯 **预算管理**：总预算 + 分类预算，可设置预警比例
+- 📥 **账单导入**：支持导入微信 / 通用格式的 **CSV** 与 **XLSX** 账单，自动识别收入/支出/转账类交易，自动匹配账户与分类，导入前可预览与去重
+- 📤 **账单导出**：一键导出 XLSX（账单明细 + 统计汇总 + 账户汇总三个工作表），**完全离线自研生成，不依赖任何第三方 Office 库**
+- 🔒 **隐私锁**：应用级 PIN 密码 / 图案锁，PBKDF2 加盐哈希存储
+- 📧 **邮箱安全验证**：修改隐私锁、找回密码等敏感操作前的邮箱验证码二次确认（支持 QQ/163/126/新浪/Gmail/Outlook/自定义邮箱）
+- 💾 **本地备份/恢复**：一键创建/恢复全量数据备份
+- 🎨 **个性化**：主题模式（跟随系统/浅色/深色）、首页快捷入口可拖拽排序与隐藏、金额可见性开关、动画开关等
 
-| 模块 | 当前状态 |
+## 技术栈
+
+| 类别 | 选型 |
 |---|---|
-| 记账、收入/支出、多账户、转账 | ✅ 已完成 |
-| 微信/支付宝 CSV/XLSX 导入、重复检测、转账识别 | ✅ 已完成 |
-| 账户流水、账单详情、编辑删除 | ✅ 已完成 |
-| 分类管理 | ✅ 已完成 |
-| 预算管理 | ✅ 已完成 |
-| 统计页面 | ✅ 已完成 |
-| 默认账户/分类/记账类型/记账后行为 | ✅ 已完成 |
-| 隐私锁 PIN/图案 | ✅ 已完成 |
-| 安全邮箱验证/找回 | ✅ 已完成 |
-| 首页快捷操作 + 桌面快捷方式 | ✅ 已完成 |
-| 主题切换/动画 | ✅ 已完成 |
-| 崩溃捕获 + 本地日志 | ✅ 已完成 |
-| 设置页代码/布局瘦身 | ✅ 2026-09-16 已完成 |
-| 备份恢复 | ⚠️ 部分完成，仅 `records.json` |
-| Excel 导出 | ❌ `ExcelExporter.kt` 空类，未实现 |
-| 自然语言记账 | ❌ `NaturalLanguageParser.kt` 空类，未接入 |
-| 日期格式/金额小数位全局应用 | ⚠️ 设置已保存，显示层尚未全面应用 |
+| 语言 | Kotlin 2.1.0 |
+| 架构 | 轻量 MVVM（`AndroidViewModel` + `LiveData`），无 DI 框架 |
+| UI | View + XML 布局 + ViewBinding，Material Design 3 |
+| 持久化 | Gson 序列化的本地 JSON 文件 + SharedPreferences + AndroidKeyStore |
+| 图表 | MPAndroidChart v3.1.0 |
+| 邮件 | Jakarta Mail 2.0.3（IMAP/SMTP） |
+| 构建 | AGP 8.13.0 + Gradle Kotlin DSL |
 
-## 当前优化原则
+## 项目结构
 
-本次“瘦身”采用**保守重构**：减少重复代码和 XML 样式，不通过删除未完成功能来制造“文件变少”的假象。
-
-- 不删除 Gson / `JsonDataStore`
-- 不改 JSON 文件名和模型字段含义
-- 不改 `Transfer` 收支统计规则
-- 不改账户关联规则：始终使用 `Account.id`
-- 不激活或删除空壳 Activity
-- 不删除 Excel / 自然语言 / 备份等未完成能力
-- 高复杂度 Fragment 暂不进行一次性激进拆分
-
-## 当前代码树
-
-```text
+```
 app/src/main/kotlin/com/example/myno/jz/
-├── MoneyBookApplication.kt
 ├── data/
-│   ├── email/        EmailConnectionTester.kt
-│   ├── imports/      CsvBillParser.kt / ImportBillItem.kt / ImportDuplicateChecker.kt / XlsxBillParser.kt
-│   ├── local/        DefaultDataInitializer.kt / JsonDataStore.kt
-│   ├── model/        Account.kt / AppSettings.kt / BackupData.kt / Bill.kt / Budget.kt / Category.kt / EmailConfig.kt / EmailProvider.kt / EmailVerification.kt / PrivacyLockConfig.kt / Transfer.kt
-│   └── repository/   BackupRepository.kt / EmailConfigStore.kt / EmailCredentialStore.kt / EmailVerificationStore.kt / FinanceRepository.kt / PrivacyLockStore.kt
+│   ├── model/        数据模型（Bill、Account、Category、Budget、Transfer、AppSettings…）
+│   ├── local/        JsonDataStore（通用 JSON CRUD）、DefaultDataInitializer（默认数据）
+│   ├── repository/   FinanceRepository、BackupRepository、PrivacyLockStore、邮箱相关 Store
+│   ├── imports/       CSV/XLSX 账单解析器、去重逻辑
+│   └── email/         IMAP/SMTP 连接测试与验证码发送
 ├── ui/
-│   ├── account/      AccountActivity.kt
-│   ├── addbill/      AddBillBottomSheet.kt
-│   ├── assets/       10 个账户/流水/转账相关 Kotlin 文件
-│   ├── backup/       BackupActivity.kt（空壳）/ BackupFragment.kt / BackupViewModel.kt
-│   ├── bills/        7 个账单/导入相关 Kotlin 文件
-│   ├── budget/       BudgetActivity.kt（空壳）/ BudgetAdapter.kt / BudgetManageFragment.kt / BudgetViewModel.kt
-│   ├── category/     CategoryActivity.kt（空壳）/ CategoryManageAdapter.kt / CategoryManageFragment.kt
-│   ├── common/       FragmentNavigation.kt
-│   ├── email/        EmailConfigFragment.kt / EmailVerificationFragment.kt
-│   ├── home/         首页、快捷操作、分类环形图、最近账单
-│   ├── importbill/   ImportBillActivity.kt
-│   ├── lock/         LockActivity.kt（空壳）
-│   ├── main/         MainActivity.kt / MainViewModel.kt
-│   ├── mine/         MineFragment.kt
-│   ├── privacy/      隐私锁、修改/找回密码/图案、安全邮箱
-│   ├── quick/        QuickEntryActivity.kt
-│   ├── settings/     SettingsFragment.kt
-│   └── statistics/   StatisticsFragment.kt
-└── utils/            AppLogger.kt / BackupManager.kt（空壳） / CrashHandler.kt / ExcelExporter.kt（空壳） / FinanceCalculator.kt / NaturalLanguageParser.kt（空壳）
+│   ├── main/          应用外壳：底部导航 + 隐私锁拦截
+│   ├── home/          首页：余额卡片、快捷入口、预算预览
+│   ├── bills/          账单列表/详情/新增/导入预览
+│   ├── assets/        资产（账户）与转账
+│   ├── budget/        预算管理
+│   ├── category/      分类管理
+│   ├── statistics/    统计图表
+│   ├── backup/        本地备份/恢复
+│   ├── email/         邮箱配置与验证
+│   ├── privacy/       隐私锁（设置/校验/修改/重置）
+│   ├── settings/      应用设置
+│   └── mine/          「我的」功能入口聚合页
+└── utils/             日志、崩溃捕获、日期与收支计算、自研 XLSX 导出
 ```
 
-Android `res` 当前核对为：`color 4`、`drawable 50`、`drawable-v24 1`、`layout 40`、`menu 1`、launcher/mipmap 12、`values 4`、`values-night 2`、`xml 3`。未发现可安全确认的未引用 drawable。
-
-## 数据规则
-
-1. `balance = account.balance + income − expense − transferOut + transferIn`
-2. `Transfer` 永远不计入收入/支出统计
-3. 账户关联一律使用 `Account.id`
-4. 系统账户“经营账户”“日利加”不参与普通资产统计
-5. 修改账户名称只能修改 `Account.name`，不能修改 `Account.id`
+更完整的架构说明、数据流、全部类清单与已知问题，请见：**[`JZAPP_项目完整开发文档.md`](./JZAPP_项目完整开发文档.md)**。
 
 ## 构建
 
 ```bash
-./gradlew assembleDebug
+./gradlew :app:assembleDebug
 ```
 
-当前优化环境尝试过 Gradle 构建，但因无法联网下载 Gradle 9.0.0（`services.gradle.org` DNS/网络失败），没有完成真实 Android 编译验证。请在本地 Android/Gradle 环境执行构建后再作为最终通过依据。
+首次构建需要网络下载 Gradle 依赖（AndroidX、Material、MPAndroidChart via JitPack、Jakarta Mail、Gson 等）。
 
-## 文档
+- **minSdk**: 23（Android 6.0）
+- **targetSdk**: 34
+- **compileSdk**: 36
+- **JDK**: 17
 
-- `MoneyBook_项目完整开发记录.md`：完整权威文档、代码树、功能状态、数据规则、路线图
-- `AGENTS.md`：AI 编码助手硬性规则
-- `GEMINI.md`：Gemini 工具等价规则
-- `REFACTOR_20260916.md`：本次瘦身与验证记录
-- `CHANGELOG.md`：按日期记录项目变更
+## 隐私与安全说明
+
+- 应用**不上传任何数据到服务器**，`allowBackup="false"`，不参与系统级自动云备份。
+- 隐私锁密码/图案以 PBKDF2（120,000 次迭代）加盐哈希存储，不可逆、无本地"万能钥匙"。
+- 邮箱授权码使用 Android Keystore 生成的 AES 密钥加密存储，密钥不出设备。
+- 本地备份文件当前为**明文 JSON**，请妥善保管导出的备份文件。
+
+## 已知限制
+
+- 首个版本，尚无自动化测试。
+- 部分菜单入口（个人信息、导出账单快捷入口、意见反馈）尚未实现，点击会提示"即将接入"。
+- CSV 与 XLSX 两条导入解析路径对"转账类"交易的识别逻辑尚不完全一致。
+
+更多细节见 [`JZAPP_项目完整开发文档.md`](./JZAPP_项目完整开发文档.md) 第 11 节「已知问题 / 技术债」。
+
+## 面向 AI 编程助手
+
+如果你是 AI 编程助手（Claude Code、Gemini CLI、Codex 等），在修改本仓库前请先阅读：
+
+- [`AGENTS.md`](./AGENTS.md) — 通用编码规范与注意事项
+- [`GEMINI.md`](./GEMINI.md) — Gemini CLI 专用补充说明
+
+## 版本记录
+
+见 [`CHANGELOG.md`](./CHANGELOG.md)。
